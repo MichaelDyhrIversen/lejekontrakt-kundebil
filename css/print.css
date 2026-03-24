@@ -1,0 +1,308 @@
+/* =================================================================
+   PRINT STYLES - OPTIMIZED FOR 2-PAGE A4 OUTPUT
+   These styles override screen styles when printing
+   ================================================================= */
+
+@page {
+  size: A4;
+  margin: 10mm 12mm;
+}
+
+@media print {
+  /* Hide all UI elements */
+  .no-print,
+  .app-header,
+  .form-sidebar,
+  .modal,
+  .toast-message {
+    display: none !important;
+  }
+
+  /* Reset body and layout */
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    height: auto;
+  }
+
+  .app-container {
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: auto;
+  }
+
+  .preview-area {
+    background: #fff;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Page styles */
+  .page {
+    background: #fff;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    min-height: auto;
+    page-break-after: auto;
+  }
+
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* Optimized spacing for 2-page layout */
+  .header {
+    margin-bottom: 4mm;
+    padding-bottom: 3mm;
+    border-bottom: 2px solid #000;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 1.5mm;
+  }
+
+  /* Grid and boxes */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+  }
+
+  .box {
+    border: 1.5px solid #444;
+    border-radius: 3px;
+    padding: 3mm;
+    min-height: auto;
+    margin-bottom: 4mm;
+  }
+
+  .box:last-child {
+    margin-bottom: 0;
+  }
+
+  .box h3 {
+    margin: 0 0 1.5mm 0;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* Labels and rows */
+  .label {
+    font-size: 10px;
+    color: #333;
+    margin-top: 1mm;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 28mm 1fr;
+    gap: 2mm;
+    align-items: end;
+    margin-top: 1mm;
+  }
+
+  .row .label {
+    margin: 0;
+  }
+
+  /* Fields - show content, hide input */
+  .field {
+    border-bottom: 1px solid #666;
+    min-height: 14px;
+    padding: 1px 0;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .field[contenteditable] {
+    display: none !important;
+  }
+
+  .field-value {
+    display: inline !important;
+    white-space: pre-wrap;
+    font-size: 11px;
+  }
+
+  /* Notes and text */
+  .note {
+    font-size: 9.5px;
+    color: #333;
+    line-height: 1.3;
+  }
+
+  .note.red {
+    color: #a60000;
+  }
+
+  .small {
+    font-size: 9.5px;
+  }
+
+  .muted {
+    color: #666;
+  }
+
+  /* Signature blocks */
+  .sign-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+    margin-top: 8mm;
+  }
+
+  .sign {
+    border: 1.5px solid #444;
+    border-radius: 3px;
+    padding: 3mm;
+    min-height: 18mm;
+    position: relative;
+  }
+
+  .stamp-overlay {
+    display: block !important;
+    position: absolute;
+    top: 3mm;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: calc(100% - 6mm);
+    max-height: calc(100% - 16mm);
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .sign .line {
+    border-top: 1px solid #666;
+    margin-top: 8mm;
+  }
+
+  .sign .caption {
+    font-size: 9px;
+    color: #333;
+    margin-top: 1.5mm;
+  }
+
+  /* Footer fields */
+  .footer-fields {
+    display: block;
+    margin-top: 4mm;
+  }
+
+  .cols-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+  }
+
+  .cols-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+  }
+
+  /* Page-specific optimizations */
+  #page-1 {
+    padding: 8mm 10mm;
+  }
+
+  #page-1 .grid-2 {
+    margin-bottom: 4mm;
+  }
+
+  #page-1 .note {
+    margin-top: 4mm;
+  }
+
+  #page-1 .note + .note {
+    margin-top: 2mm;
+  }
+
+  #page-2 {
+    padding: 8mm 10mm;
+  }
+
+  #page-2 .small {
+    margin-bottom: 4mm;
+  }
+
+  #page-2 .box {
+    margin-bottom: 4mm;
+  }
+
+  #page-2 .note {
+    margin-top: 4mm;
+  }
+
+  #page-2 .note + .note {
+    margin-top: 3mm;
+  }
+
+  /* Ensure no orphans or widows */
+  p, .note, .label {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Prevent breaks inside elements */
+  .box,
+  .sign,
+  .row {
+    page-break-inside: avoid;
+  }
+
+  /* Force page breaks */
+  .page-break {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  /* Remove any backgrounds or shadows */
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .page,
+  .box,
+  .sign {
+    background: white !important;
+  }
+
+  /* Ensure all text is black for printing */
+  body {
+    color: #000;
+  }
+
+  /* Print hyperlinks without underlines */
+  a {
+    text-decoration: none;
+  }
+}
+
+/* Additional optimizations for specific printers */
+@media print and (color) {
+  .note.red {
+    color: #d00 !important;
+  }
+}
+
+@media print and (monochrome) {
+  .note.red {
+    font-weight: 600;
+  }
+}

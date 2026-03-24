@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lejekontrakt - Kundebil</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header no-print">
+    <div class="header-content">
+      <h1>Lejekontrakt - Kundebil</h1>
+      <div class="header-actions">
+        <button id="new-contract-btn" class="btn btn-secondary">Ny Kontrakt</button>
+        <button id="settings-btn" class="btn btn-secondary">Indstillinger</button>
+        <button id="help-btn" class="btn btn-secondary">Hjælp</button>
+        <button id="print-btn" class="btn btn-primary">Udskriv</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="app-container">
+    <!-- Sidebar Form -->
+    <aside class="form-sidebar no-print">
+      <form id="contract-form">
+        <!-- Udlejer Section -->
+        <section class="form-section">
+          <h2>1. Udlejer</h2>
+          <div class="form-group">
+            <label for="udlejer-select">Vælg profil</label>
+            <select id="udlejer-select" class="form-control">
+              <option value="">-- Vælg udlejer --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="udlejer-navn">Navn</label>
+            <input type="text" id="udlejer-navn" name="udlejer.navn" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="udlejer-adresse">Adresse</label>
+            <input type="text" id="udlejer-adresse" name="udlejer.adresse" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="udlejer-postby">Postnr. & by</label>
+            <input type="text" id="udlejer-postby" name="udlejer.postby" class="form-control">
+          </div>
+        </section>
+
+        <!-- Lejer Section -->
+        <section class="form-section">
+          <h2>2. Lejer</h2>
+          <div class="form-group">
+            <label for="lejer-navn">Navn</label>
+            <input type="text" id="lejer-navn" name="lejer.navn" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="lejer-tlf">Telefon</label>
+            <input type="text" id="lejer-tlf" name="lejer.tlf" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="lejer-koerekortnr">Kørekort nr.</label>
+            <input type="text" id="lejer-koerekortnr" name="lejer.koerekortnr" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="lejer-koerekort-udstedt">Udstedt den</label>
+            <input type="date" id="lejer-koerekort-udstedt" name="lejer.koerekort_udstedt" class="form-control">
+          </div>
+        </section>
+
+        <!-- Fører Section -->
+        <section class="form-section">
+          <h2>3. Fører (udover lejer)</h2>
+          <div class="form-group">
+            <label for="foerer-koerekortnr">Kørekort nr.</label>
+            <input type="text" id="foerer-koerekortnr" name="foerer.koerekortnr" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="foerer-koerekort-udstedt">Udstedt den</label>
+            <input type="date" id="foerer-koerekort-udstedt" name="foerer.koerekort_udstedt" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="foerer-tekst">Yderligere oplysninger</label>
+            <textarea id="foerer-tekst" name="foerer.tekst" class="form-control" rows="2"></textarea>
+          </div>
+        </section>
+
+        <!-- Bil Section -->
+        <section class="form-section">
+          <h2>4. Biloplysninger</h2>
+          <div class="form-group">
+            <label for="car-select">Vælg bil</label>
+            <select id="car-select" class="form-control">
+              <option value="">-- Vælg bil --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bil-model">Model</label>
+            <input type="text" id="bil-model" name="bil.model" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="bil-regnr">Reg. nr.</label>
+            <input type="text" id="bil-regnr" name="bil.regnr" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="bil-km-start">Kilometer ved start</label>
+            <input type="text" id="bil-km-start" name="bil.km_start" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="bil-km-slut">Ved aflevering</label>
+            <input type="text" id="bil-km-slut" name="bil.km_slut" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="bil-kort-km">Kørt km</label>
+            <input type="text" id="bil-kort-km" name="bil.kort_km" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="bil-braendstof">Brændstof pr. km kr.</label>
+            <input type="text" id="bil-braendstof" name="bil.braendstof_pr_km" class="form-control">
+          </div>
+        </section>
+
+        <!-- Lejeperiode Section -->
+        <section class="form-section">
+          <h2>5. Lejeperiode</h2>
+          <div class="form-group">
+            <label for="leje-fra">Fra (dato)</label>
+            <input type="date" id="leje-fra" name="leje.fra" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="leje-fra-kl">Kl.</label>
+            <input type="text" id="leje-fra-kl" name="leje.fra_kl" class="form-control" placeholder="HH:MM">
+          </div>
+          <div class="form-group">
+            <label for="leje-til">Til (dato)</label>
+            <input type="date" id="leje-til" name="leje.til" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="leje-til-kl">Kl.</label>
+            <input type="text" id="leje-til-kl" name="leje.til_kl" class="form-control" placeholder="HH:MM">
+          </div>
+        </section>
+
+        <!-- Pris & Selvrisiko Section -->
+        <section class="form-section">
+          <h2>6. Lejepris</h2>
+          <div class="form-group">
+            <label for="pris-lejepris">Lejepris</label>
+            <input type="text" id="pris-lejepris" name="pris.lejepris" class="form-control">
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h2>7. Selvrisiko</h2>
+          <div class="form-group">
+            <label for="selvrisiko-ansvar">Ansvar</label>
+            <input type="text" id="selvrisiko-ansvar" name="selvrisiko.ansvar" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="selvrisiko-kasko">Kasko</label>
+            <input type="text" id="selvrisiko-kasko" name="selvrisiko.kasko" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="selvrisiko-tillaeg">Selvrisiko-forsikring kr.</label>
+            <input type="text" id="selvrisiko-tillaeg" name="selvrisiko.tillaeg" class="form-control">
+          </div>
+        </section>
+
+        <!-- Bemærkninger Section -->
+        <section class="form-section">
+          <h2>Bemærkninger</h2>
+          <div class="form-group">
+            <label for="bemaerkninger">Bemærkninger</label>
+            <textarea id="bemaerkninger" name="bemaerkninger" class="form-control" rows="3"></textarea>
+          </div>
+        </section>
+
+        <!-- Meta Section -->
+        <section class="form-section">
+          <h2>Dato</h2>
+          <div class="form-group">
+            <label for="meta-dato">Kontraktdato</label>
+            <input type="date" id="meta-dato" name="meta.dato" class="form-control">
+          </div>
+        </section>
+
+        <!-- Erklæring Section -->
+        <section class="form-section">
+          <h2>Tro og love-erklæring</h2>
+          <div class="form-group">
+            <label for="erklaering-ejer">Køretøjet er ejet af</label>
+            <input type="text" id="erklaering-ejer" name="erklaering.ejer" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="erklaering-regnr">Registreringsnummer</label>
+            <input type="text" id="erklaering-regnr" name="erklaering.regnr" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="erklaering-dato">Dato</label>
+            <input type="date" id="erklaering-dato" name="erklaering.dato" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="erklaering-navn">Navn</label>
+            <input type="text" id="erklaering-navn" name="erklaering.navn" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="erklaering-tlf">Telefon</label>
+            <input type="text" id="erklaering-tlf" name="erklaering.tlf" class="form-control">
+          </div>
+        </section>
+      </form>
+    </aside>
+
+    <!-- Template Preview -->
+    <main class="preview-area" id="template-preview">
+      <!-- PAGE 1 -->
+      <section class="page page-break" id="page-1">
+        <header class="header">
+          <div class="title">Lejekontrakt</div>
+          <div class="subtitle">– Kundebil</div>
+        </header>
+
+        <div class="grid-2">
+          <!-- Left column -->
+          <div>
+            <div class="box">
+              <h3>1. Udlejer</h3>
+              <div class="field" contenteditable="true" data-field="udlejer.navn"></div>
+              <div class="field" contenteditable="true" data-field="udlejer.adresse"></div>
+              <div class="field" contenteditable="true" data-field="udlejer.postby"></div>
+            </div>
+
+            <div class="box">
+              <h3>2. Lejer</h3>
+              <div class="field" contenteditable="true" data-field="lejer.navn"></div>
+              <div class="row">
+                <div class="label">Tlf:</div>
+                <div class="field" contenteditable="true" data-field="lejer.tlf"></div>
+              </div>
+              <div class="row">
+                <div class="label">Kørekort nr.:</div>
+                <div class="field" contenteditable="true" data-field="lejer.koerekortnr"></div>
+              </div>
+              <div class="row">
+                <div class="label">Udstedt den:</div>
+                <div class="field" contenteditable="true" data-field="lejer.koerekort_udstedt"></div>
+              </div>
+            </div>
+
+            <div class="box" style="min-height: 30mm;">
+              <h3>3. Fører – udover lejer</h3>
+              <div class="row">
+                <div class="label">Kørekort nr.:</div>
+                <div class="field" contenteditable="true" data-field="foerer.koerekortnr"></div>
+              </div>
+              <div class="row">
+                <div class="label">Udstedt den:</div>
+                <div class="field" contenteditable="true" data-field="foerer.koerekort_udstedt"></div>
+              </div>
+              <div class="field" contenteditable="true" data-field="foerer.tekst" style="min-height: 14mm; margin-top: 2mm;"></div>
+            </div>
+
+            <div class="box">
+              <h3>4. Biloplysninger</h3>
+              <div class="row">
+                <div class="label">Model:</div>
+                <div class="field" contenteditable="true" data-field="bil.model"></div>
+              </div>
+              <div class="row">
+                <div class="label">Reg. nr.:</div>
+                <div class="field" contenteditable="true" data-field="bil.regnr"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div>
+            <div class="box">
+              <h3>5. Lejeperiode</h3>
+              <div class="row">
+                <div class="label">Fra:</div>
+                <div class="field" contenteditable="true" data-field="leje.fra"></div>
+              </div>
+              <div class="row">
+                <div class="label">Kl:</div>
+                <div class="field" contenteditable="true" data-field="leje.fra_kl"></div>
+              </div>
+              <div class="row">
+                <div class="label">Til:</div>
+                <div class="field" contenteditable="true" data-field="leje.til"></div>
+              </div>
+              <div class="row">
+                <div class="label">Kl:</div>
+                <div class="field" contenteditable="true" data-field="leje.til_kl"></div>
+              </div>
+              <div class="label" style="margin-top:3mm;">Afleveringstidspunkt godkendes ved aflevering</div>
+              <div class="small muted" style="margin-top:6mm;">Underskrift lejer</div>
+              <div class="sign" style="margin-top:2mm; min-height: 16mm;"></div>
+            </div>
+
+            <div class="box">
+              <h3>6. Lejepris</h3>
+              <div class="field" contenteditable="true" data-field="pris.lejepris"></div>
+              <h3 style="margin-top:4mm;">7. Selvrisiko</h3>
+              <div class="row">
+                <div class="label">Ansvar:</div>
+                <div class="field" contenteditable="true" data-field="selvrisiko.ansvar"></div>
+              </div>
+              <div class="row">
+                <div class="label">Kasko:</div>
+                <div class="field" contenteditable="true" data-field="selvrisiko.kasko"></div>
+              </div>
+              <div class="row">
+                <div class="label">Selvrisiko-forsikring kr.:</div>
+                <div class="field" contenteditable="true" data-field="selvrisiko.tillaeg"></div>
+              </div>
+              <div class="label" style="margin-top:3mm;">Bemærkninger:</div>
+              <div class="field" contenteditable="true" data-field="bemaerkninger" style="min-height: 16mm;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="note-black" class="note" style="margin-top:6mm;">
+          Bilen må kun føres af lejer (eller angivet fører) i lejeperioden. Lejer hæfter for afgifter, bøder m.v.
+          Bilen må ikke udleveres til tredjemand. Kæledyr og rygning i bilen er ikke tilladt. Bilen returneres i rengjort stand.
+        </div>
+        <div id="note-red" class="note red" style="margin-top:2mm;">
+          OBS: Læs venligst vilkår på bagsiden/side 2 om ansvar, selvrisiko og erstatning.
+          Egenandel ved kasko fremgår af policen og udleveres ved underskrift.
+        </div>
+
+        <div class="footer-fields">
+          <div class="cols-2">
+            <div>
+              <div class="row">
+                <div class="label">Dato:</div>
+                <div class="field" contenteditable="true" data-field="meta.dato"></div>
+              </div>
+              <div class="row">
+                <div class="label">Kilometer ved start:</div>
+                <div class="field" contenteditable="true" data-field="bil.km_start"></div>
+              </div>
+              <div class="row">
+                <div class="label">Ved aflevering:</div>
+                <div class="field" contenteditable="true" data-field="bil.km_slut"></div>
+              </div>
+              <div class="row">
+                <div class="label">Kørt km:</div>
+                <div class="field" contenteditable="true" data-field="bil.kort_km"></div>
+              </div>
+              <div class="sign" style="margin-top:8mm;">
+                <div class="line"></div>
+                <div class="caption">Underskrift lejer</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column;">
+              <div class="row">
+                <div class="label">Brændstof pr. km kr.:</div>
+                <div class="field" contenteditable="true" data-field="bil.braendstof_pr_km"></div>
+              </div>
+              <div class="sign" id="udlejer-sign" style="margin-top:auto; min-height:38mm; display:flex; flex-direction:column; justify-content:flex-end;">
+                <img id="stamp-img" class="stamp-overlay" src="" alt="" style="display:none;">
+                <div class="line"></div>
+                <div class="caption">Udlejer (navn/underskrift)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 2 -->
+      <section class="page" id="page-2">
+        <header class="header">
+          <div class="title">Tro og love‑erklæring vedrørende brug af køretøj</div>
+        </header>
+
+        <p class="small">
+          Undertegnede bekræfter, at jeg har fået overdraget et køretøj til mig.
+        </p>
+
+        <div class="box">
+          <div class="row">
+            <div class="label">Køretøjet er ejet af:</div>
+            <div class="field" contenteditable="true" data-field="erklaering.ejer"></div>
+          </div>
+          <div class="row" style="margin-top:4mm;">
+            <div class="label">Køretøjet har registreringsnummer:</div>
+            <div class="field" contenteditable="true" data-field="erklaering.regnr"></div>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:6mm;">
+          I forbindelse med overdragelsen af køretøjet erklærer jeg, at ejeren af køretøjet har
+          undersøgt, at der som led i overdragelsen af køretøjet ikke er risiko for, at køretøjet vil blive anvendt til vanvidskørsel.
+          Samtidig erklærer jeg, at ejeren har kontrolleret, at mit kørekort er gyldigt.
+        </div>
+
+        <div class="note" style="margin-top:4mm;">
+          Jeg erklærer endvidere, at jeg og øvrige, der vil få adgang til køretøjet, ikke tidligere har foretaget
+          vanvidskørsel eller andre grove overtrædelser af færdselsloven.
+        </div>
+
+        <div class="note" style="margin-top:4mm;">
+          Som vanvidskørsel anses bl.a. kørsel med en hastighed over 200 km/t, kørsel med en hastighed over 100 km/t med en
+          samtidig overskridelse af hastighedsgrænsen med mere end 100 pct., og spirituskørsel med en promille på over 2,00.
+        </div>
+
+        <div class="note" style="margin-top:4mm;">
+          Jeg erklærer også, at jeg er gjort opmærksom på, at jeg kan blive pålagt det fulde erstatningsansvar,
+          hvis køretøjet bliver konfiskeret som følge af vanvidskørsel.
+        </div>
+
+        <div style="margin-top:10mm;">
+          <div class="row">
+            <div class="label">Dato:</div>
+            <div class="field" contenteditable="true" data-field="erklaering.dato"></div>
+          </div>
+          <div class="row" style="margin-top:3mm;">
+            <div class="label">Navn:</div>
+            <div class="field" contenteditable="true" data-field="erklaering.navn"></div>
+          </div>
+          <div class="row" style="margin-top:3mm;">
+            <div class="label">Tlf:</div>
+            <div class="field" contenteditable="true" data-field="erklaering.tlf"></div>
+          </div>
+        </div>
+
+        <div class="sign-block">
+          <div class="sign">
+            <div class="line"></div>
+            <div class="caption">Underskrift</div>
+          </div>
+          <div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal no-print">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Indstillinger</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      
+      <div class="modal-tabs">
+        <button class="tab-btn active" data-tab="udlejere">Udlejere</button>
+        <button class="tab-btn" data-tab="biler">Biler</button>
+        <button class="tab-btn" data-tab="defaults">Standardværdier</button>
+        <button class="tab-btn" data-tab="stempel">Stempel</button>
+        <button class="tab-btn" data-tab="tekster">Tekster</button>
+        <button class="tab-btn" data-tab="export">Backup</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Udlejere Tab -->
+        <div id="udlejere-tab" class="tab-content active">
+          <div class="tab-header">
+            <h3>Udlejerprofiler</h3>
+            <button id="add-udlejer-btn" class="btn btn-primary">Tilføj udlejer</button>
+          </div>
+          
+          <div id="udlejer-form" class="edit-form">
+            <h4>Tilføj/Rediger Udlejer</h4>
+            <div class="form-group">
+              <label for="settings-udlejer-navn">Navn *</label>
+              <input type="text" id="settings-udlejer-navn" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="settings-udlejer-adresse">Adresse</label>
+              <input type="text" id="settings-udlejer-adresse" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="settings-udlejer-postby">Postnr. & by</label>
+              <input type="text" id="settings-udlejer-postby" class="form-control">
+            </div>
+            <div class="form-actions">
+              <button id="save-udlejer-btn" class="btn btn-primary">Gem</button>
+              <button id="cancel-udlejer-btn" class="btn btn-secondary">Annuller</button>
+            </div>
+          </div>
+
+          <div id="udlejer-list"></div>
+        </div>
+
+        <!-- Biler Tab -->
+        <div id="biler-tab" class="tab-content">
+          <div class="tab-header">
+            <h3>Bilbibliotek</h3>
+            <button id="add-car-btn" class="btn btn-primary">Tilføj bil</button>
+          </div>
+          
+          <div id="car-form" class="edit-form">
+            <h4>Tilføj/Rediger Bil</h4>
+            <div class="form-group">
+              <label for="settings-car-model">Model *</label>
+              <input type="text" id="settings-car-model" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="settings-car-regnr">Registreringsnummer *</label>
+              <input type="text" id="settings-car-regnr" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="settings-car-lejepris">Lejepris</label>
+              <input type="text" id="settings-car-lejepris" class="form-control">
+            </div>
+            <div class="form-actions">
+              <button id="save-car-btn" class="btn btn-primary">Gem</button>
+              <button id="cancel-car-btn" class="btn btn-secondary">Annuller</button>
+            </div>
+          </div>
+
+          <div id="car-list"></div>
+        </div>
+
+        <!-- Defaults Tab -->
+        <div id="defaults-tab" class="tab-content">
+          <h3>Standardværdier</h3>
+          <p class="text-muted">Disse værdier bruges som standard for nye kontrakter</p>
+          
+          <h4>Lejeperiode</h4>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="default-start-dato">
+              Sæt startdato automatisk til dagens dato
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="default-leje-dage">Standard lejeperiode (dage)</label>
+            <input type="number" id="default-leje-dage" class="form-control" min="0" placeholder="f.eks. 1">
+          </div>
+          <div class="form-group">
+            <label for="default-fra-kl">Standard starttidspunkt</label>
+            <input type="text" id="default-fra-kl" class="form-control" placeholder="HH:MM">
+          </div>
+          <div class="form-group">
+            <label for="default-til-kl">Standard sluttidspunkt</label>
+            <input type="text" id="default-til-kl" class="form-control" placeholder="HH:MM">
+          </div>
+
+          <h4>Selvrisiko</h4>
+          <div class="form-group">
+            <label for="default-ansvar">Ansvar</label>
+            <input type="text" id="default-ansvar" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="default-kasko">Kasko</label>
+            <input type="text" id="default-kasko" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="default-tillaeg">Selvrisiko-forsikring kr.</label>
+            <input type="text" id="default-tillaeg" class="form-control">
+          </div>
+          
+          <h4>Bil</h4>
+          <div class="form-group">
+            <label for="default-braendstof">Brændstof pr. km kr.</label>
+            <input type="text" id="default-braendstof" class="form-control">
+          </div>
+          
+          <button id="save-defaults-btn" class="btn btn-primary">Gem standardværdier</button>
+        </div>
+
+        <!-- Stempel Tab -->
+        <div id="stempel-tab" class="tab-content">
+          <h3>Stempel / Underskrift</h3>
+          <p class="text-muted">Upload et billede der vises som overlay i "Udlejer (navn/underskrift)" boksen ved udskrivning.</p>
+
+          <div id="stamp-preview-wrap" style="display:none; margin: 1rem 0;">
+            <img id="stamp-preview-img" src="" alt="Stempel preview" style="max-height: 80px; max-width: 200px; border: 1px solid #ddd; border-radius: 4px; padding: 4px;">
+          </div>
+
+          <div class="backup-actions">
+            <button id="upload-stamp-btn" class="btn btn-primary">Upload stempel</button>
+            <input type="file" id="stamp-file-input" accept="image/*" style="display:none;">
+            <button id="remove-stamp-btn" class="btn btn-secondary" style="display:none;">Fjern stempel</button>
+          </div>
+        </div>
+
+        <!-- Tekster Tab -->
+        <div id="tekster-tab" class="tab-content">
+          <h3>Tekster på side 1</h3>
+          <p class="text-muted">Tilpas de to informationstekster der vises under kontraktfelterne på side 1.</p>
+
+          <div class="form-group" style="margin-top:1.5rem;">
+            <label for="settings-note-black">Sort tekst</label>
+            <textarea id="settings-note-black" class="form-control" rows="4"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="settings-note-red">Rød tekst (OBS)</label>
+            <textarea id="settings-note-red" class="form-control" rows="3"></textarea>
+          </div>
+
+          <button id="save-tekster-btn" class="btn btn-primary">Gem tekster</button>
+          <button id="reset-tekster-btn" class="btn btn-secondary" style="margin-left:0.5rem;">Nulstil til standard</button>
+        </div>
+
+        <!-- Export Tab -->
+        <div id="export-tab" class="tab-content">
+          <h3>Backup & Gendan</h3>
+          <p class="text-muted">Eksporter og importer alle dine data</p>
+          
+          <div class="backup-actions">
+            <button id="export-data-btn" class="btn btn-primary">Eksporter alle data</button>
+            <button id="import-data-btn" class="btn btn-secondary">Importer data</button>
+            <input type="file" id="import-data-file" accept="application/json" style="display: none;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="modal no-print">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Hjælp</h2>
+        <button class="close-modal" id="help-close">&times;</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="tab-btn active" onclick="switchHelpTab('generelt')">Generelt</button>
+        <button class="tab-btn" onclick="switchHelpTab('url')">URL-integration</button>
+        <button class="tab-btn" onclick="switchHelpTab('stempel')">Stempel</button>
+        <button class="tab-btn" onclick="switchHelpTab('backup')">Backup</button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Generelt -->
+        <div id="help-generelt" class="tab-content active">
+          <h3>Kom godt i gang</h3>
+          <p class="text-muted" style="margin-bottom:1rem;">Sådan opretter du en lejekontrakt trin for trin.</p>
+          <ol style="line-height:2; padding-left:1.25rem;">
+            <li>Åbn <strong>Indstillinger</strong> og opret mindst én udlejerprofil og én bil – disse gemmes til fremtidig brug.</li>
+            <li>Vælg udlejer og bil i venstre side, eller udfyld felterne manuelt.</li>
+            <li>Udfyld lejers oplysninger: navn, telefon og kørekortoplysninger.</li>
+            <li>Angiv lejeperiode (fra/til dato og klokkeslæt) samt lejepris og selvrisiko.</li>
+            <li>Gennemse kontrakten i forhåndsvisningen til højre – felterne kan også redigeres direkte der.</li>
+            <li>Klik <strong>Udskriv</strong> for at printe kontrakten eller gemme den som PDF.</li>
+          </ol>
+          <p class="text-muted" style="margin-top:1rem;">Kontrakten gemmes automatisk løbende. Klik <strong>Ny Kontrakt</strong> for at starte en ny.</p>
+        </div>
+
+        <!-- URL-integration -->
+        <div id="help-url" class="tab-content">
+          <h3>URL-integration</h3>
+          <p class="text-muted" style="margin-bottom:1rem;">
+            Et eksternt system (f.eks. et værkstedssystem, CRM eller bookingsystem) kan åbne appen og forudfylde lejers oplysninger automatisk via URL-parametre.
+          </p>
+          <h4 style="margin-bottom:0.5rem;">Understøttede parametre</h4>
+          <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem; font-size:0.9rem;">
+            <thead>
+              <tr style="background:#f5f5f5;">
+                <th style="text-align:left; padding:0.5rem 0.75rem; border:1px solid #ddd;">Parameter</th>
+                <th style="text-align:left; padding:0.5rem 0.75rem; border:1px solid #ddd;">Felt</th>
+                <th style="text-align:left; padding:0.5rem 0.75rem; border:1px solid #ddd;">Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_navn</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Navn</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Fritekst</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_tlf</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Telefon</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Fritekst</td></tr>
+              <tr><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_koerekortnr</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Kørekort nr.</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Fritekst</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_koerekort_udstedt</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Udstedt den</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">DD-MM-YYYY</td></tr>
+            </tbody>
+          </table>
+          <h4 style="margin-bottom:0.5rem;">Eksempel-URL</h4>
+          <code style="display:block; background:#f5f5f5; border:1px solid #ddd; border-radius:4px; padding:0.75rem; font-size:0.8rem; word-break:break-all; line-height:1.6;">
+            https://lejekontrakt.qcompany.dk/?lejer_navn=Jan%20Hansen&amp;lejer_tlf=12345678&amp;lejer_koerekortnr=1234567890&amp;lejer_koerekort_udstedt=15-06-2018
+          </code>
+          <p class="text-muted" style="margin-top:1rem;">
+            Når appen åbner med parametre, oprettes altid en ny kontrakt med de angivne oplysninger. Parametrene fjernes automatisk fra adresselinjen – et genindlæs anvender dem ikke igen.
+          </p>
+        </div>
+
+        <!-- Stempel -->
+        <div id="help-stempel" class="tab-content">
+          <h3>Stempel / underskrift-overlay</h3>
+          <p class="text-muted" style="margin-bottom:1rem;">Du kan uploade et billede (f.eks. en scannet underskrift eller et firmastempel) der automatisk vises i "Udlejer (navn/underskrift)"-boksen på side 1.</p>
+          <ol style="line-height:2; padding-left:1.25rem;">
+            <li>Åbn <strong>Indstillinger → Stempel</strong>.</li>
+            <li>Klik <strong>Upload stempel</strong> og vælg et billede (PNG med transparent baggrund anbefales).</li>
+            <li>Billedet gemmes og vises straks i underskriftsboksen i forhåndsvisningen.</li>
+            <li>Stemplet medtages automatisk ved udskrivning.</li>
+            <li>Klik <strong>Fjern stempel</strong> for at slette det igen.</li>
+          </ol>
+          <p class="text-muted" style="margin-top:1rem;">Stemplet gemmes lokalt i browseren og følger med ved backup-eksport.</p>
+        </div>
+
+        <!-- Backup -->
+        <div id="help-backup" class="tab-content">
+          <h3>Backup &amp; Gendan</h3>
+          <p class="text-muted" style="margin-bottom:1rem;">Alle data (udlejerprofiler, biler, indstillinger og stempel) gemmes i browserens lokale lager. Brug eksport/import til at tage backup eller flytte data til en anden browser/enhed.</p>
+          <h4 style="margin-bottom:0.5rem;">Eksporter</h4>
+          <p style="margin-bottom:1rem;">Åbn <strong>Indstillinger → Backup</strong> og klik <strong>Eksporter alle data</strong>. En JSON-fil downloades til din computer.</p>
+          <h4 style="margin-bottom:0.5rem;">Importer</h4>
+          <p>Klik <strong>Importer data</strong> og vælg en tidligere eksporteret JSON-fil.</p>
+          <p class="text-muted" style="margin-top:0.5rem;"><strong>OBS:</strong> Import overskriver alle eksisterende data – tag en eksport først, hvis du vil bevare nuværende data.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/modules/preview.js"></script>
+  <script src="js/modules/form.js"></script>
+  <script src="js/modules/print.js"></script>
+  <script src="js/modules/settings.js"></script>
+  <script src="js/modules/udlejer.js"></script>
+  <script src="js/modules/cars.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <title>Lejekontrakt – Kundebil (2 sider)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* ====== Printopsætning ====== */
+    @page { size: A4; margin: 12mm; }
+    @media print {
+      body { background: #fff; }
+      .no-print { display: none !important; }
+      .page { box-shadow: none; margin: 0; width: auto; min-height: auto; }
+      .field-input { display: none !important; }
+      .field-value { display: inline !important; }
+    }
+
+    /* ====== Skærmopsætning ====== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #111;
+      line-height: 1.25;
+    }
+    body { background: #f2f2f2; }
+
+    .wrap {
+      width: 210mm; /* A4 bredde til skærmforhåndsvisning */
+      margin: 10mm auto;
+    }
+    .page {
+      background: #fff;
+      width: 210mm;
+      min-height: 297mm;
+      box-shadow: 0 0 5mm rgba(0,0,0,0.08);
+      padding: 8mm 10mm;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .page + .page { margin-top: 10mm; }
+
+    .header {
+      margin-bottom: 6mm;
+      border-bottom: 2px solid #000;
+      padding-bottom: 4mm;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+    .subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-top: 2mm;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+    }
+
+    .box {
+      border: 1.5px solid #444;
+      border-radius: 4px;
+      padding: 4mm;
+      min-height: 25mm;
+    }
+    .box h3 {
+      margin: 0 0 2mm 0;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .label {
+      font-size: 11.25px;
+      color: #333;
+      margin-top: 1.5mm;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 28mm 1fr;
+      gap: 3mm;
+      align-items: end;
+      margin-top: 1.5mm;
+    }
+    .row .label { margin: 0; }
+
+    /* Felter (skærm vs. print) */
+    .field {
+      border-bottom: 1px solid #aaa;
+      min-height: 17px;
+      padding: 2px 0 1px;
+    }
+    .field[contenteditable="true"] {
+      outline: none;
+    }
+    .field-input { display: inline; }
+    .field-value { display: none; white-space: pre-wrap; }
+
+    /* Små noter og brødtekst */
+    .note {
+      font-size: 10.5px;
+      color: #333;
+    }
+    .note.red { color: #a60000; }
+
+    /* Underskrift-områder */
+    .sign-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+      margin-top: 6mm;
+    }
+    .sign { border: 1.5px solid #444; border-radius: 4px; padding: 4mm; min-height: 22mm; }
+    .sign .line { border-top: 1px solid #666; margin-top: 10mm; }
+    .sign .caption { font-size: 10.5px; color: #333; }
+
+    .small { font-size: 10.25px; }
+    .muted { color: #666; }
+
+    /* Hjælpeline i bunden af side 1 (brændstof, km-tal, dato osv.) */
+    .footer-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+      margin-top: 6mm;
+    }
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+
+    /* Sidebrydning garanti mellem sider */
+    .page-break { break-after: page; }
+
+    /* Topknapper (til demo) */
+    .toolbar {
+      display: flex; gap: 8px; align-items: center;
+      padding: 8px 0 2px; justify-content: flex-end;
+    }
+    .toolbar button {
+      background: #0f6cbd; color: #fff; border: 0; border-radius: 4px;
+      padding: 8px 12px; cursor: pointer; font-weight: 600;
+    }
+    .toolbar button.secondary { background: #666; }
+    .toolbar input[type=file] { display: none; }
+    .toolbar label { background:#666;color:#fff;border-radius:4px;padding:8px 12px;cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="wrap no-print">
+    <div class="toolbar">
+      <button onclick="window.print()">Udskriv</button>
+      <button class="secondary" onclick="demoFill()">Udfyld med JSON (demo)</button>
+      <label>
+        Indlæs JSON
+        <input type="file" accept="application/json" onchange="loadJsonFile(event)" />
+      </label>
+    </div>
+  </div>
+
+  <!-- ====================== SIDE 1 ====================== -->
+  <section class="wrap page page-break" id="page-1">
+    <header class="header">
+      <div class="title">Lejekontrakt</div>
+      <div class="subtitle">– Kundebil</div>
+    </header>
+
+    <div class="grid-2">
+      <!-- Venstre kolonne -->
+      <div>
+        <div class="box">
+          <h3>1. Udlejer</h3>
+          <div class="field" contenteditable="true" data-field="udlejer.navn">{{udlejer.navn}}</div>
+          <div class="field" contenteditable="true" data-field="udlejer.adresse">{{udlejer.adresse}}</div>
+          <div class="field" contenteditable="true" data-field="udlejer.postby">{{udlejer.postby}}</div>
+        </div>
+
+        <div class="box">
+          <h3>2. Lejer</h3>
+          <div class="field" contenteditable="true" data-field="lejer.navn">{{lejer.navn}}</div>
+          <div class="row">
+            <div class="label">Tlf:</div>
+            <div class="field" contenteditable="true" data-field="lejer.tlf">{{lejer.tlf}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Kørekort nr.:</div>
+            <div class="field" contenteditable="true" data-field="lejer.koerekortnr">{{lejer.koerekortnr}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Udstedt den:</div>
+            <div class="field" contenteditable="true" data-field="lejer.koerekort_udstedt">{{lejer.koerekort_udstedt}}</div>
+          </div>
+        </div>
+
+        <div class="box" style="min-height: 40mm;">
+          <h3>3. Fører – udover lejer</h3>
+          <div class="row">
+            <div class="label">Kørekort nr.:</div>
+            <div class="field" contenteditable="true" data-field="foerer.koerekortnr">{{foerer.koerekortnr}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Udstedt den:</div>
+            <div class="field" contenteditable="true" data-field="foerer.koerekort_udstedt">{{foerer.koerekort_udstedt}}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Højre kolonne -->
+      <div>
+        <div class="box">
+          <h3>4. Biloplysninger</h3>
+          <div class="row">
+            <div class="label">Model:</div>
+            <div class="field" contenteditable="true" data-field="bil.model">{{bil.model}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Reg. nr.:</div>
+            <div class="field" contenteditable="true" data-field="bil.regnr">{{bil.regnr}}</div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>5. Lejeperiode</h3>
+          <div class="row">
+            <div class="label">Fra:</div>
+            <div class="field" contenteditable="true" data-field="leje.fra">{{leje.fra}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Kl:</div>
+            <div class="field" contenteditable="true" data-field="leje.fra_kl">{{leje.fra_kl}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Til:</div>
+            <div class="field" contenteditable="true" data-field="leje.til">{{leje.til}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Kl:</div>
+            <div class="field" contenteditable="true" data-field="leje.til_kl">{{leje.til_kl}}</div>
+          </div>
+          <div class="label" style="margin-top:3mm;">Afleveringstidspunkt godkendes ved aflevering</div>
+          <div class="small muted" style="margin-top:6mm;">Underskrift lejer</div>
+          <div class="sign" style="margin-top:2mm; min-height: 16mm;"></div>
+        </div>
+
+        <div class="box">
+          <h3>6. Lejepris</h3>
+          <div class="field" contenteditable="true" data-field="pris.lejepris">{{pris.lejepris}}</div>
+          <h3 style="margin-top:4mm;">7. Selvrisiko</h3>
+          <div class="row">
+            <div class="label">Ansvar:</div>
+            <div class="field" contenteditable="true" data-field="selvrisiko.ansvar">{{selvrisiko.ansvar}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Kasko:</div>
+            <div class="field" contenteditable="true" data-field="selvrisiko.kasko">{{selvrisiko.kasko}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Selvrisiko-forsikring kr.:</div>
+            <div class="field" contenteditable="true" data-field="selvrisiko.tillaeg">{{selvrisiko.tillaeg}}</div>
+          </div>
+          <div class="label" style="margin-top:3mm;">Bemærkninger:</div>
+          <div class="field" contenteditable="true" data-field="bemaerkninger" style="min-height: 16mm;">{{bemaerkninger}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:6mm;">
+      Bilen må kun føres af lejer (eller angivet fører) i lejeperioden. Lejer hæfter for afgifter, bøder m.v.  
+      Bilen må ikke udleveres til tredjemand. Kæledyr og rygning i bilen er ikke tilladt. Bilen returneres i rengjort stand.
+    </div>
+    <div class="note red" style="margin-top:2mm;">
+      OBS: Læs venligst vilkår på bagsiden/side 2 om ansvar, selvrisiko og erstatning.  
+      Egenandel ved kasko fremgår af policen og udleveres ved underskrift.
+    </div>
+
+    <div class="footer-fields">
+      <div class="cols-2">
+        <div>
+          <div class="row">
+            <div class="label">Dato:</div>
+            <div class="field" contenteditable="true" data-field="meta.dato">{{meta.dato}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Kilometer ved start:</div>
+            <div class="field" contenteditable="true" data-field="bil.km_start">{{bil.km_start}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Ved aflevering:</div>
+            <div class="field" contenteditable="true" data-field="bil.km_slut">{{bil.km_slut}}</div>
+          </div>
+          <div class="row">
+            <div class="label">Kort km:</div>
+            <div class="field" contenteditable="true" data-field="bil.kort_km">{{bil.kort_km}}</div>
+          </div>
+        </div>
+        <div>
+          <div class="row">
+            <div class="label">Brændstof pr. km kr.:</div>
+            <div class="field" contenteditable="true" data-field="bil.braendstof_pr_km">{{bil.braendstof_pr_km}}</div>
+          </div>
+          <div class="sign" style="margin-top:8mm;">
+            <div class="line"></div>
+            <div class="caption">Underskrift lejer</div>
+          </div>
+          <div class="sign" style="margin-top:6mm;">
+            <div class="line"></div>
+            <div class="caption">Udlejer (navn/underskrift)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== SIDE 2 ====================== -->
+  <section class="wrap page" id="page-2">
+    <header class="header">
+      <div class="title">Tro og love‑erklæring vedrørende brug af køretøj</div>
+    </header>
+
+    <p class="small">
+      Undertegnede bekræfter, at jeg har fået overdraget et køretøj til mig.
+    </p>
+
+    <div class="box">
+      <div class="row">
+        <div class="label">Køretøjet er ejet af:</div>
+        <div class="field" contenteditable="true" data-field="erklaering.ejer">{{erklaering.ejer}}</div>
+      </div>
+      <div class="row" style="margin-top:4mm;">
+        <div class="label">Køretøjet har registreringsnummer:</div>
+        <div class="field" contenteditable="true" data-field="erklaering.regnr">{{erklaering.regnr}}</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:6mm;">
+      I forbindelse med overdragelsen af køretøjet erklærer jeg, at ejeren af køretøjet har
+      undersøgt, at der som led i overdragelsen af køretøjet ikke er risiko for, at køretøjet vil blive anvendt til vanvidskørsel.
+      Samtidig erklærer jeg, at ejeren har kontrolleret, at mit kørekort er gyldigt.
+    </div>
+
+    <div class="note" style="margin-top:4mm;">
+      Jeg erklærer endvidere, at jeg og øvrige, der vil få adgang til køretøjet, ikke tidligere har foretaget
+      vanvidskørsel eller andre grove overtrædelser af færdselsloven.
+    </div>
+
+    <div class="note" style="margin-top:4mm;">
+      Som vanvidskørsel anses bl.a. kørsel med en hastighed over 200 km/t, kørsel med en hastighed over 100 km/t med en
+      samtidig overskridelse af hastighedsgrænsen med mere end 100 pct., og spirituskørsel med en promille på over 2,00.
+    </div>
+
+    <div class="note" style="margin-top:4mm;">
+      Jeg erklærer også, at jeg er gjort opmærksom på, at jeg kan blive pålagt det fulde erstatningsansvar,
+      hvis køretøjet bliver konfiskeret som følge af vanvidskørsel.
+    </div>
+
+    <div class="cols-3" style="margin-top:10mm;">
+      <div class="row">
+        <div class="label">Dato:</div>
+        <div class="field" contenteditable="true" data-field="erklaering.dato">{{erklaering.dato}}</div>
+      </div>
+      <div class="row">
+        <div class="label">Navn:</div>
+        <div class="field" contenteditable="true" data-field="erklaering.navn">{{erklaering.navn}}</div>
+      </div>
+      <div class="row">
+        <div class="label">Tlf:</div>
+        <div class="field" contenteditable="true" data-field="erklaering.tlf">{{erklaering.tlf}}</div>
+      </div>
+    </div>
+
+    <div class="sign-block">
+      <div class="sign">
+        <div class="line"></div>
+        <div class="caption">Underskrift</div>
+      </div>
+      <div></div>
+    </div>
+  </section>
+
+  <!-- ============== JS: binding af JSON til felter (og visning ved print) ============== -->
+  <script>
+    /**
+     * Udfylder alle elementer med data-field="a.b.c" fra et JSON-objekt { a: { b: { c: "..." } } }
+     * og spejler værdien ud i en .field-value span som bruges ved print.
+     */
+    function fillFromJson(data) {
+      document.querySelectorAll('[data-field]').forEach(el => {
+        const path = el.getAttribute('data-field').split('.');
+        let v = data;
+        for (const k of path) v = v && v[k] != null ? v[k] : '';
+        const text = (v ?? '').toString();
+
+        // Sæt i contenteditable feltet
+        if (el.isContentEditable) {
+          // ryd placeholder tokens hvis de findes
+          if (el.textContent.trim().startsWith('{{')) el.textContent = '';
+          el.textContent = text;
+        }
+
+        // Sørg for en print-værdi findes (span)
+        let mirror = el.nextElementSibling;
+        if (!mirror || !mirror.classList.contains('field-value')) {
+          mirror = document.createElement('span');
+          mirror.className = 'field-value';
+          el.after(mirror);
+        }
+        mirror.textContent = text;
+      });
+    }
+
+    // Opdater mirror når man taster (for skærm->print)
+    document.addEventListener('input', (e) => {
+      const el = e.target;
+      if (el.matches('[data-field]') && el.isContentEditable) {
+        let mirror = el.nextElementSibling;
+        if (!mirror || !mirror.classList.contains('field-value')) {
+          mirror = document.createElement('span');
+          mirror.className = 'field-value';
+          el.after(mirror);
+        }
+        mirror.textContent = el.textContent;
+      }
+    });
+
+    // Demo-data (klik på "Udfyld med JSON (demo)")
+    function demoFill() {
+      const demo = {
+        udlejer: {
+          navn: "Brdr. Dan Værksted ApS Vedvundsvej",
+          adresse: "Vedvundsvej 2",
+          postby: "3400 Hillerød"
+        },
+        lejer: {
+          navn: "Michael Dyhr Iversen",
+          tlf: "26176164",
+          koerekortnr: "20665761",
+          koerekort_udstedt: ""
+        },
+        foerer: {
+          koerekortnr: "",
+          koerekort_udstedt: ""
+        },
+        bil: {
+          model: "VW Polo",
+          regnr: "EC67789",
+          km_start: "",
+          km_slut: "",
+          kort_km: "",
+          braendstof_pr_km: "0,00"
+        },
+        leje: {
+          fra: "18-03-2026",
+          fra_kl: "",
+          til: "",
+          til_kl: ""
+        },
+        pris: { lejepris: "" },
+        selvrisiko: { ansvar: "", kasko: "5000", tillaeg: "" },
+        bemaerkninger: "",
+        meta: { dato: "18-03-2026" },
+        erklaering: {
+          ejer: "Brdr. Dan Værksted ApS",
+          regnr: "EC67789",
+          dato: "18-03-2026",
+          navn: "Michael Dyhr Iversen",
+          tlf: "26176164"
+        }
+      };
+      fillFromJson(demo);
+    }
+
+    // Indlæs JSON fra fil
+    async function loadJsonFile(ev) {
+      const file = ev.target.files?.[0];
+      if (!file) return;
+      const text = await file.text();
+      try {
+        const data = JSON.parse(text);
+        fillFromJson(data);
+      } catch (e) {
+        alert("Kunne ikke parse JSON: " + e.message);
+      }
+    }
+  </script>
+</body>
+</html>
