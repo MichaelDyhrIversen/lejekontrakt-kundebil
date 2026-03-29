@@ -64,10 +64,15 @@
         <h1>Lejekontrakt - Kundebil</h1>
       </div>
       <div class="header-actions">
-        <button id="new-contract-btn" class="btn btn-secondary">Ny Kontrakt</button>
-        <button id="settings-btn" class="btn btn-secondary">Indstillinger</button>
-        <button id="help-btn" class="btn btn-secondary">Hjælp</button>
-        <button id="print-btn" class="btn btn-primary">Udskriv</button>
+        <select id="lang-switcher" class="lang-switcher" aria-label="Language">
+          <option value="da">DA</option>
+          <option value="en">EN</option>
+          <option value="de">DE</option>
+        </select>
+        <button id="new-contract-btn" class="btn btn-secondary" data-i18n="ui.header.btn_new">Ny Kontrakt</button>
+        <button id="settings-btn" class="btn btn-secondary" data-i18n="ui.header.btn_settings">Indstillinger</button>
+        <button id="help-btn" class="btn btn-secondary" data-i18n="ui.header.btn_help">Hjælp</button>
+        <button id="print-btn" class="btn btn-primary" data-i18n="ui.header.btn_print">Udskriv</button>
       </div>
     </div>
   </header>
@@ -79,185 +84,185 @@
       <form id="contract-form">
         <!-- Udlejer Section -->
         <section class="form-section">
-          <h2>1. Udlejer</h2>
+          <h2 data-i18n="ui.form.section_udlejer">1. Udlejer</h2>
           <div class="form-group">
-            <label for="udlejer-select">Vælg profil</label>
+            <label for="udlejer-select" data-i18n="ui.form.label_vaelg_profil">Vælg profil</label>
             <select id="udlejer-select" class="form-control">
-              <option value="">-- Vælg udlejer --</option>
+              <option value="" data-i18n="ui.form.option_select_udlejer">-- Vælg udlejer --</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="udlejer-navn">Navn</label>
+            <label for="udlejer-navn" data-i18n="ui.form.label_navn">Navn</label>
             <input type="text" id="udlejer-navn" name="udlejer.navn" class="form-control">
           </div>
           <div class="form-group">
-            <label for="udlejer-adresse">Adresse</label>
+            <label for="udlejer-adresse" data-i18n="ui.form.label_adresse">Adresse</label>
             <input type="text" id="udlejer-adresse" name="udlejer.adresse" class="form-control">
           </div>
           <div class="form-group">
-            <label for="udlejer-postby">Postnr. & by</label>
+            <label for="udlejer-postby" data-i18n="ui.form.label_postby">Postnr. & by</label>
             <input type="text" id="udlejer-postby" name="udlejer.postby" class="form-control">
           </div>
         </section>
 
         <!-- Lejer Section -->
         <section class="form-section">
-          <h2>2. Lejer</h2>
+          <h2 data-i18n="ui.form.section_lejer">2. Lejer</h2>
           <div class="form-group">
-            <label for="lejer-navn">Navn</label>
+            <label for="lejer-navn" data-i18n="ui.form.label_navn">Navn</label>
             <input type="text" id="lejer-navn" name="lejer.navn" class="form-control">
           </div>
           <div class="form-group">
-            <label for="lejer-tlf">Telefon</label>
+            <label for="lejer-tlf" data-i18n="ui.form.label_telefon">Telefon</label>
             <input type="text" id="lejer-tlf" name="lejer.tlf" class="form-control">
           </div>
           <div class="form-group">
-            <label for="lejer-koerekortnr">Kørekort nr.</label>
+            <label for="lejer-koerekortnr" data-i18n="ui.form.label_koerekortnr">Kørekort nr.</label>
             <input type="text" id="lejer-koerekortnr" name="lejer.koerekortnr" class="form-control">
           </div>
           <div class="form-group">
-            <label for="lejer-koerekort-udstedt">Udstedt den</label>
+            <label for="lejer-koerekort-udstedt" data-i18n="ui.form.label_udstedt_den">Udstedt den</label>
             <input type="date" id="lejer-koerekort-udstedt" name="lejer.koerekort_udstedt" class="form-control">
           </div>
         </section>
 
         <!-- Fører Section -->
         <section class="form-section">
-          <h2>3. Fører (udover lejer)</h2>
+          <h2 data-i18n="ui.form.section_foerer">3. Fører (udover lejer)</h2>
           <div class="form-group">
-            <label for="foerer-koerekortnr">Kørekort nr.</label>
+            <label for="foerer-koerekortnr" data-i18n="ui.form.label_koerekortnr">Kørekort nr.</label>
             <input type="text" id="foerer-koerekortnr" name="foerer.koerekortnr" class="form-control">
           </div>
           <div class="form-group">
-            <label for="foerer-koerekort-udstedt">Udstedt den</label>
+            <label for="foerer-koerekort-udstedt" data-i18n="ui.form.label_udstedt_den">Udstedt den</label>
             <input type="date" id="foerer-koerekort-udstedt" name="foerer.koerekort_udstedt" class="form-control">
           </div>
           <div class="form-group">
-            <label for="foerer-tekst">Yderligere oplysninger</label>
+            <label for="foerer-tekst" data-i18n="ui.form.label_yderligere">Yderligere oplysninger</label>
             <textarea id="foerer-tekst" name="foerer.tekst" class="form-control" rows="2"></textarea>
           </div>
         </section>
 
         <!-- Bil Section -->
         <section class="form-section">
-          <h2>4. Biloplysninger</h2>
+          <h2 data-i18n="ui.form.section_bil">4. Biloplysninger</h2>
           <div class="form-group">
-            <label for="car-select">Vælg bil</label>
+            <label for="car-select" data-i18n="ui.form.label_vaelg_bil">Vælg bil</label>
             <select id="car-select" class="form-control">
-              <option value="">-- Vælg bil --</option>
+              <option value="" data-i18n="ui.form.option_select_bil">-- Vælg bil --</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="bil-model">Model</label>
+            <label for="bil-model" data-i18n="ui.form.label_model">Model</label>
             <input type="text" id="bil-model" name="bil.model" class="form-control">
           </div>
           <div class="form-group">
-            <label for="bil-regnr">Reg. nr.</label>
+            <label for="bil-regnr" data-i18n="ui.form.label_regnr">Reg. nr.</label>
             <input type="text" id="bil-regnr" name="bil.regnr" class="form-control">
           </div>
           <div class="form-group">
-            <label for="bil-km-start">Kilometer ved start</label>
+            <label for="bil-km-start" data-i18n="ui.form.label_km_start">Kilometer ved start</label>
             <input type="text" id="bil-km-start" name="bil.km_start" class="form-control">
           </div>
           <div class="form-group">
-            <label for="bil-km-slut">Ved aflevering</label>
+            <label for="bil-km-slut" data-i18n="ui.form.label_km_slut">Ved aflevering</label>
             <input type="text" id="bil-km-slut" name="bil.km_slut" class="form-control">
           </div>
           <div class="form-group">
-            <label for="bil-kort-km">Kørt km</label>
+            <label for="bil-kort-km" data-i18n="ui.form.label_koert_km">Kørt km</label>
             <input type="text" id="bil-kort-km" name="bil.kort_km" class="form-control">
           </div>
           <div class="form-group">
-            <label for="bil-braendstof">Brændstof pr. km kr.</label>
+            <label for="bil-braendstof" data-i18n="ui.form.label_braendstof">Brændstof pr. km kr.</label>
             <input type="text" id="bil-braendstof" name="bil.braendstof_pr_km" class="form-control">
           </div>
         </section>
 
         <!-- Lejeperiode Section -->
         <section class="form-section">
-          <h2>5. Lejeperiode</h2>
+          <h2 data-i18n="ui.form.section_lejeperiode">5. Lejeperiode</h2>
           <div class="form-group">
-            <label for="leje-fra">Fra (dato)</label>
+            <label for="leje-fra" data-i18n="ui.form.label_fra_dato">Fra (dato)</label>
             <input type="date" id="leje-fra" name="leje.fra" class="form-control">
           </div>
           <div class="form-group">
-            <label for="leje-fra-kl">Kl.</label>
+            <label for="leje-fra-kl" data-i18n="ui.form.label_kl">Kl.</label>
             <input type="text" id="leje-fra-kl" name="leje.fra_kl" class="form-control" placeholder="HH:MM">
           </div>
           <div class="form-group">
-            <label for="leje-til">Til (dato)</label>
+            <label for="leje-til" data-i18n="ui.form.label_til_dato">Til (dato)</label>
             <input type="date" id="leje-til" name="leje.til" class="form-control">
           </div>
           <div class="form-group">
-            <label for="leje-til-kl">Kl.</label>
+            <label for="leje-til-kl" data-i18n="ui.form.label_kl">Kl.</label>
             <input type="text" id="leje-til-kl" name="leje.til_kl" class="form-control" placeholder="HH:MM">
           </div>
         </section>
 
         <!-- Pris & Selvrisiko Section -->
         <section class="form-section">
-          <h2>6. Lejepris</h2>
+          <h2 data-i18n="ui.form.section_lejepris">6. Lejepris</h2>
           <div class="form-group">
-            <label for="pris-lejepris">Lejepris</label>
+            <label for="pris-lejepris" data-i18n="ui.form.label_lejepris">Lejepris</label>
             <input type="text" id="pris-lejepris" name="pris.lejepris" class="form-control">
           </div>
         </section>
 
         <section class="form-section">
-          <h2>7. Selvrisiko</h2>
+          <h2 data-i18n="ui.form.section_selvrisiko">7. Selvrisiko</h2>
           <div class="form-group">
-            <label for="selvrisiko-ansvar">Ansvar</label>
+            <label for="selvrisiko-ansvar" data-i18n="ui.form.label_ansvar">Ansvar</label>
             <input type="text" id="selvrisiko-ansvar" name="selvrisiko.ansvar" class="form-control">
           </div>
           <div class="form-group">
-            <label for="selvrisiko-kasko">Kasko</label>
+            <label for="selvrisiko-kasko" data-i18n="ui.form.label_kasko">Kasko</label>
             <input type="text" id="selvrisiko-kasko" name="selvrisiko.kasko" class="form-control">
           </div>
           <div class="form-group">
-            <label for="selvrisiko-tillaeg">Selvrisiko-forsikring kr.</label>
+            <label for="selvrisiko-tillaeg" data-i18n="ui.form.label_selvrisiko_forsikring">Selvrisiko-forsikring kr.</label>
             <input type="text" id="selvrisiko-tillaeg" name="selvrisiko.tillaeg" class="form-control">
           </div>
         </section>
 
         <!-- Bemærkninger Section -->
         <section class="form-section">
-          <h2>Bemærkninger</h2>
+          <h2 data-i18n="ui.form.section_bemaerkninger">Bemærkninger</h2>
           <div class="form-group">
-            <label for="bemaerkninger">Bemærkninger</label>
+            <label for="bemaerkninger" data-i18n="ui.form.label_bemaerkninger">Bemærkninger</label>
             <textarea id="bemaerkninger" name="bemaerkninger" class="form-control" rows="3"></textarea>
           </div>
         </section>
 
         <!-- Meta Section -->
         <section class="form-section">
-          <h2>Dato</h2>
+          <h2 data-i18n="ui.form.section_dato">Dato</h2>
           <div class="form-group">
-            <label for="meta-dato">Kontraktdato</label>
+            <label for="meta-dato" data-i18n="ui.form.label_kontraktdato">Kontraktdato</label>
             <input type="date" id="meta-dato" name="meta.dato" class="form-control">
           </div>
         </section>
 
         <!-- Erklæring Section -->
         <section class="form-section">
-          <h2>Tro og love-erklæring</h2>
+          <h2 data-i18n="ui.form.section_erklaering">Tro og love-erklæring</h2>
           <div class="form-group">
-            <label for="erklaering-ejer">Køretøjet er ejet af</label>
+            <label for="erklaering-ejer" data-i18n="ui.form.label_koeretoej_ejet_af">Køretøjet er ejet af</label>
             <input type="text" id="erklaering-ejer" name="erklaering.ejer" class="form-control">
           </div>
           <div class="form-group">
-            <label for="erklaering-regnr">Registreringsnummer</label>
+            <label for="erklaering-regnr" data-i18n="ui.form.label_registreringsnummer">Registreringsnummer</label>
             <input type="text" id="erklaering-regnr" name="erklaering.regnr" class="form-control">
           </div>
           <div class="form-group">
-            <label for="erklaering-dato">Dato</label>
+            <label for="erklaering-dato" data-i18n="ui.form.label_dato">Dato</label>
             <input type="date" id="erklaering-dato" name="erklaering.dato" class="form-control">
           </div>
           <div class="form-group">
-            <label for="erklaering-navn">Navn</label>
+            <label for="erklaering-navn" data-i18n="ui.form.label_navn">Navn</label>
             <input type="text" id="erklaering-navn" name="erklaering.navn" class="form-control">
           </div>
           <div class="form-group">
-            <label for="erklaering-tlf">Telefon</label>
+            <label for="erklaering-tlf" data-i18n="ui.form.label_telefon">Telefon</label>
             <input type="text" id="erklaering-tlf" name="erklaering.tlf" class="form-control">
           </div>
         </section>
@@ -269,58 +274,58 @@
       <!-- PAGE 1 -->
       <section class="page page-break" id="page-1">
         <header class="header">
-          <div class="title">Lejekontrakt</div>
-          <div class="subtitle">– Kundebil</div>
+          <div class="title" data-i18n="contract.title">Lejekontrakt</div>
+          <div class="subtitle" data-i18n="contract.subtitle">– Kundebil</div>
         </header>
 
         <div class="grid-2">
           <!-- Left column -->
           <div>
             <div class="box">
-              <h3>1. Udlejer</h3>
+              <h3 data-i18n="contract.section_udlejer">1. Udlejer</h3>
               <div class="field" contenteditable="true" data-field="udlejer.navn"></div>
               <div class="field" contenteditable="true" data-field="udlejer.adresse"></div>
               <div class="field" contenteditable="true" data-field="udlejer.postby"></div>
             </div>
 
             <div class="box">
-              <h3>2. Lejer</h3>
+              <h3 data-i18n="contract.section_lejer">2. Lejer</h3>
               <div class="field" contenteditable="true" data-field="lejer.navn"></div>
               <div class="row">
-                <div class="label">Tlf:</div>
+                <div class="label" data-i18n="contract.label_tlf">Tlf:</div>
                 <div class="field" contenteditable="true" data-field="lejer.tlf"></div>
               </div>
               <div class="row">
-                <div class="label">Kørekort nr.:</div>
+                <div class="label" data-i18n="contract.label_koerekortnr">Kørekort nr.:</div>
                 <div class="field" contenteditable="true" data-field="lejer.koerekortnr"></div>
               </div>
               <div class="row">
-                <div class="label">Udstedt den:</div>
+                <div class="label" data-i18n="contract.label_udstedt_den">Udstedt den:</div>
                 <div class="field" contenteditable="true" data-field="lejer.koerekort_udstedt"></div>
               </div>
             </div>
 
             <div class="box" style="min-height: 30mm;">
-              <h3>3. Fører – udover lejer</h3>
+              <h3 data-i18n="contract.section_foerer">3. Fører – udover lejer</h3>
               <div class="row">
-                <div class="label">Kørekort nr.:</div>
+                <div class="label" data-i18n="contract.label_koerekortnr">Kørekort nr.:</div>
                 <div class="field" contenteditable="true" data-field="foerer.koerekortnr"></div>
               </div>
               <div class="row">
-                <div class="label">Udstedt den:</div>
+                <div class="label" data-i18n="contract.label_udstedt_den">Udstedt den:</div>
                 <div class="field" contenteditable="true" data-field="foerer.koerekort_udstedt"></div>
               </div>
               <div class="field" contenteditable="true" data-field="foerer.tekst" style="min-height: 14mm; margin-top: 2mm;"></div>
             </div>
 
             <div class="box">
-              <h3>4. Biloplysninger</h3>
+              <h3 data-i18n="contract.section_bil">4. Biloplysninger</h3>
               <div class="row">
-                <div class="label">Model:</div>
+                <div class="label" data-i18n="contract.label_model">Model:</div>
                 <div class="field" contenteditable="true" data-field="bil.model"></div>
               </div>
               <div class="row">
-                <div class="label">Reg. nr.:</div>
+                <div class="label" data-i18n="contract.label_regnr">Reg. nr.:</div>
                 <div class="field" contenteditable="true" data-field="bil.regnr"></div>
               </div>
             </div>
@@ -329,45 +334,45 @@
           <!-- Right column -->
           <div>
             <div class="box">
-              <h3>5. Lejeperiode</h3>
+              <h3 data-i18n="contract.section_lejeperiode">5. Lejeperiode</h3>
               <div class="row">
-                <div class="label">Fra:</div>
+                <div class="label" data-i18n="contract.label_fra">Fra:</div>
                 <div class="field" contenteditable="true" data-field="leje.fra"></div>
               </div>
               <div class="row">
-                <div class="label">Kl:</div>
+                <div class="label" data-i18n="contract.label_kl">Kl:</div>
                 <div class="field" contenteditable="true" data-field="leje.fra_kl"></div>
               </div>
               <div class="row">
-                <div class="label">Til:</div>
+                <div class="label" data-i18n="contract.label_til">Til:</div>
                 <div class="field" contenteditable="true" data-field="leje.til"></div>
               </div>
               <div class="row">
-                <div class="label">Kl:</div>
+                <div class="label" data-i18n="contract.label_kl">Kl:</div>
                 <div class="field" contenteditable="true" data-field="leje.til_kl"></div>
               </div>
-              <div class="label" style="margin-top:3mm;">Afleveringstidspunkt godkendes ved aflevering</div>
-              <div class="small muted" style="margin-top:6mm;">Underskrift lejer</div>
+              <div class="label" style="margin-top:3mm;" data-i18n="contract.label_aflevering_godkendes">Afleveringstidspunkt godkendes ved aflevering</div>
+              <div class="small muted" style="margin-top:6mm;" data-i18n="contract.caption_underskrift_lejer">Underskrift lejer</div>
               <div class="sign" style="margin-top:2mm; min-height: 16mm;"></div>
             </div>
 
             <div class="box">
-              <h3>6. Lejepris</h3>
+              <h3 data-i18n="contract.section_lejepris">6. Lejepris</h3>
               <div class="field" contenteditable="true" data-field="pris.lejepris"></div>
-              <h3 style="margin-top:4mm;">7. Selvrisiko</h3>
+              <h3 style="margin-top:4mm;" data-i18n="contract.section_selvrisiko">7. Selvrisiko</h3>
               <div class="row">
-                <div class="label">Ansvar:</div>
+                <div class="label" data-i18n="contract.label_ansvar">Ansvar:</div>
                 <div class="field" contenteditable="true" data-field="selvrisiko.ansvar"></div>
               </div>
               <div class="row">
-                <div class="label">Kasko:</div>
+                <div class="label" data-i18n="contract.label_kasko">Kasko:</div>
                 <div class="field" contenteditable="true" data-field="selvrisiko.kasko"></div>
               </div>
               <div class="row">
-                <div class="label">Selvrisiko-forsikring kr.:</div>
+                <div class="label" data-i18n="contract.label_selvrisiko_forsikring">Selvrisiko-forsikring kr.:</div>
                 <div class="field" contenteditable="true" data-field="selvrisiko.tillaeg"></div>
               </div>
-              <div class="label" style="margin-top:3mm;">Bemærkninger:</div>
+              <div class="label" style="margin-top:3mm;" data-i18n="contract.label_bemaerkninger">Bemærkninger:</div>
               <div class="field" contenteditable="true" data-field="bemaerkninger" style="min-height: 16mm;"></div>
             </div>
           </div>
@@ -386,35 +391,35 @@
           <div class="cols-2">
             <div>
               <div class="row">
-                <div class="label">Dato:</div>
+                <div class="label" data-i18n="contract.label_dato">Dato:</div>
                 <div class="field" contenteditable="true" data-field="meta.dato"></div>
               </div>
               <div class="row">
-                <div class="label">Kilometer ved start:</div>
+                <div class="label" data-i18n="contract.label_km_start">Kilometer ved start:</div>
                 <div class="field" contenteditable="true" data-field="bil.km_start"></div>
               </div>
               <div class="row">
-                <div class="label">Ved aflevering:</div>
+                <div class="label" data-i18n="contract.label_km_slut">Ved aflevering:</div>
                 <div class="field" contenteditable="true" data-field="bil.km_slut"></div>
               </div>
               <div class="row">
-                <div class="label">Kørt km:</div>
+                <div class="label" data-i18n="contract.label_koert_km">Kørt km:</div>
                 <div class="field" contenteditable="true" data-field="bil.kort_km"></div>
               </div>
               <div class="sign" style="margin-top:8mm;">
                 <div class="line"></div>
-                <div class="caption">Underskrift lejer</div>
+                <div class="caption" data-i18n="contract.caption_underskrift_lejer">Underskrift lejer</div>
               </div>
             </div>
             <div style="display:flex; flex-direction:column;">
               <div class="row">
-                <div class="label">Brændstof pr. km kr.:</div>
+                <div class="label" data-i18n="contract.label_braendstof">Brændstof pr. km kr.:</div>
                 <div class="field" contenteditable="true" data-field="bil.braendstof_pr_km"></div>
               </div>
               <div class="sign" id="udlejer-sign" style="margin-top:auto; min-height:38mm; display:flex; flex-direction:column; justify-content:flex-end;">
                 <img id="stamp-img" class="stamp-overlay" src="" alt="" style="display:none;">
                 <div class="line"></div>
-                <div class="caption">Udlejer (navn/underskrift)</div>
+                <div class="caption" data-i18n="contract.caption_udlejer">Udlejer (navn/underskrift)</div>
               </div>
             </div>
           </div>
@@ -424,56 +429,56 @@
       <!-- PAGE 2 -->
       <section class="page" id="page-2">
         <header class="header">
-          <div class="title">Tro og love‑erklæring vedrørende brug af køretøj</div>
+          <div class="title" data-i18n="contract.page2.title">Tro og love‑erklæring vedrørende brug af køretøj</div>
         </header>
 
-        <p class="small">
+        <p class="small" data-i18n="contract.page2.intro">
           Undertegnede bekræfter, at jeg har fået overdraget et køretøj til mig.
         </p>
 
         <div class="box">
           <div class="row">
-            <div class="label">Køretøjet er ejet af:</div>
+            <div class="label" data-i18n="contract.page2.label_ejet_af">Køretøjet er ejet af:</div>
             <div class="field" contenteditable="true" data-field="erklaering.ejer"></div>
           </div>
           <div class="row" style="margin-top:4mm;">
-            <div class="label">Køretøjet har registreringsnummer:</div>
+            <div class="label" data-i18n="contract.page2.label_regnr">Køretøjet har registreringsnummer:</div>
             <div class="field" contenteditable="true" data-field="erklaering.regnr"></div>
           </div>
         </div>
 
-        <div class="note" style="margin-top:6mm;">
+        <div class="note" style="margin-top:6mm;" data-i18n="contract.page2.para1">
           I forbindelse med overdragelsen af køretøjet erklærer jeg, at ejeren af køretøjet har
           undersøgt, at der som led i overdragelsen af køretøjet ikke er risiko for, at køretøjet vil blive anvendt til vanvidskørsel.
           Samtidig erklærer jeg, at ejeren har kontrolleret, at mit kørekort er gyldigt.
         </div>
 
-        <div class="note" style="margin-top:4mm;">
+        <div class="note" style="margin-top:4mm;" data-i18n="contract.page2.para2">
           Jeg erklærer endvidere, at jeg og øvrige, der vil få adgang til køretøjet, ikke tidligere har foretaget
           vanvidskørsel eller andre grove overtrædelser af færdselsloven.
         </div>
 
-        <div class="note" style="margin-top:4mm;">
+        <div class="note" style="margin-top:4mm;" data-i18n="contract.page2.para3">
           Som vanvidskørsel anses bl.a. kørsel med en hastighed over 200 km/t, kørsel med en hastighed over 100 km/t med en
           samtidig overskridelse af hastighedsgrænsen med mere end 100 pct., og spirituskørsel med en promille på over 2,00.
         </div>
 
-        <div class="note" style="margin-top:4mm;">
+        <div class="note" style="margin-top:4mm;" data-i18n="contract.page2.para4">
           Jeg erklærer også, at jeg er gjort opmærksom på, at jeg kan blive pålagt det fulde erstatningsansvar,
           hvis køretøjet bliver konfiskeret som følge af vanvidskørsel.
         </div>
 
         <div style="margin-top:10mm;">
           <div class="row">
-            <div class="label">Dato:</div>
+            <div class="label" data-i18n="contract.page2.label_dato">Dato:</div>
             <div class="field" contenteditable="true" data-field="erklaering.dato"></div>
           </div>
           <div class="row" style="margin-top:3mm;">
-            <div class="label">Navn:</div>
+            <div class="label" data-i18n="contract.page2.label_navn">Navn:</div>
             <div class="field" contenteditable="true" data-field="erklaering.navn"></div>
           </div>
           <div class="row" style="margin-top:3mm;">
-            <div class="label">Tlf:</div>
+            <div class="label" data-i18n="contract.page2.label_tlf">Tlf:</div>
             <div class="field" contenteditable="true" data-field="erklaering.tlf"></div>
           </div>
         </div>
@@ -481,7 +486,7 @@
         <div class="sign-block">
           <div class="sign">
             <div class="line"></div>
-            <div class="caption">Underskrift</div>
+            <div class="caption" data-i18n="contract.page2.caption_underskrift">Underskrift</div>
           </div>
           <div></div>
         </div>
@@ -498,44 +503,44 @@
   <div id="settings-modal" class="modal no-print">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Indstillinger</h2>
+        <h2 data-i18n="settings.title">Indstillinger</h2>
         <button class="close-modal">&times;</button>
       </div>
-      
+
       <div class="modal-tabs">
-        <button class="tab-btn active" data-tab="udlejere">Udlejere</button>
-        <button class="tab-btn" data-tab="biler">Biler</button>
-        <button class="tab-btn" data-tab="defaults">Standardværdier</button>
-        <button class="tab-btn" data-tab="stempel">Stempel</button>
-        <button class="tab-btn" data-tab="tekster">Tekster</button>
-        <button class="tab-btn" data-tab="export">Backup</button>
+        <button class="tab-btn active" data-tab="udlejere" data-i18n="settings.tab_udlejere">Udlejere</button>
+        <button class="tab-btn" data-tab="biler" data-i18n="settings.tab_biler">Biler</button>
+        <button class="tab-btn" data-tab="defaults" data-i18n="settings.tab_defaults">Standardværdier</button>
+        <button class="tab-btn" data-tab="stempel" data-i18n="settings.tab_stempel">Stempel</button>
+        <button class="tab-btn" data-tab="tekster" data-i18n="settings.tab_tekster">Tekster</button>
+        <button class="tab-btn" data-tab="export" data-i18n="settings.tab_export">Backup</button>
       </div>
 
       <div class="modal-body">
         <!-- Udlejere Tab -->
         <div id="udlejere-tab" class="tab-content active">
           <div class="tab-header">
-            <h3>Udlejerprofiler</h3>
-            <button id="add-udlejer-btn" class="btn btn-primary">Tilføj udlejer</button>
+            <h3 data-i18n="settings.udlejere.heading">Udlejerprofiler</h3>
+            <button id="add-udlejer-btn" class="btn btn-primary" data-i18n="settings.udlejere.btn_add">Tilføj udlejer</button>
           </div>
-          
+
           <div id="udlejer-form" class="edit-form">
-            <h4>Tilføj/Rediger Udlejer</h4>
+            <h4 data-i18n="settings.udlejere.form_heading">Tilføj/Rediger Udlejer</h4>
             <div class="form-group">
-              <label for="settings-udlejer-navn">Navn *</label>
+              <label for="settings-udlejer-navn" data-i18n="settings.udlejere.label_navn">Navn *</label>
               <input type="text" id="settings-udlejer-navn" class="form-control">
             </div>
             <div class="form-group">
-              <label for="settings-udlejer-adresse">Adresse</label>
+              <label for="settings-udlejer-adresse" data-i18n="settings.udlejere.label_adresse">Adresse</label>
               <input type="text" id="settings-udlejer-adresse" class="form-control">
             </div>
             <div class="form-group">
-              <label for="settings-udlejer-postby">Postnr. & by</label>
+              <label for="settings-udlejer-postby" data-i18n="settings.udlejere.label_postby">Postnr. & by</label>
               <input type="text" id="settings-udlejer-postby" class="form-control">
             </div>
             <div class="form-actions">
-              <button id="save-udlejer-btn" class="btn btn-primary">Gem</button>
-              <button id="cancel-udlejer-btn" class="btn btn-secondary">Annuller</button>
+              <button id="save-udlejer-btn" class="btn btn-primary" data-i18n="settings.udlejere.btn_gem">Gem</button>
+              <button id="cancel-udlejer-btn" class="btn btn-secondary" data-i18n="settings.udlejere.btn_annuller">Annuller</button>
             </div>
           </div>
 
@@ -545,27 +550,27 @@
         <!-- Biler Tab -->
         <div id="biler-tab" class="tab-content">
           <div class="tab-header">
-            <h3>Bilbibliotek</h3>
-            <button id="add-car-btn" class="btn btn-primary">Tilføj bil</button>
+            <h3 data-i18n="settings.biler.heading">Bilbibliotek</h3>
+            <button id="add-car-btn" class="btn btn-primary" data-i18n="settings.biler.btn_add">Tilføj bil</button>
           </div>
-          
+
           <div id="car-form" class="edit-form">
-            <h4>Tilføj/Rediger Bil</h4>
+            <h4 data-i18n="settings.biler.form_heading">Tilføj/Rediger Bil</h4>
             <div class="form-group">
-              <label for="settings-car-model">Model *</label>
+              <label for="settings-car-model" data-i18n="settings.biler.label_model">Model *</label>
               <input type="text" id="settings-car-model" class="form-control">
             </div>
             <div class="form-group">
-              <label for="settings-car-regnr">Registreringsnummer *</label>
+              <label for="settings-car-regnr" data-i18n="settings.biler.label_regnr">Registreringsnummer *</label>
               <input type="text" id="settings-car-regnr" class="form-control">
             </div>
             <div class="form-group">
-              <label for="settings-car-lejepris">Lejepris</label>
+              <label for="settings-car-lejepris" data-i18n="settings.biler.label_lejepris">Lejepris</label>
               <input type="text" id="settings-car-lejepris" class="form-control">
             </div>
             <div class="form-actions">
-              <button id="save-car-btn" class="btn btn-primary">Gem</button>
-              <button id="cancel-car-btn" class="btn btn-secondary">Annuller</button>
+              <button id="save-car-btn" class="btn btn-primary" data-i18n="settings.biler.btn_gem">Gem</button>
+              <button id="cancel-car-btn" class="btn btn-secondary" data-i18n="settings.biler.btn_annuller">Annuller</button>
             </div>
           </div>
 
@@ -574,102 +579,102 @@
 
         <!-- Defaults Tab -->
         <div id="defaults-tab" class="tab-content">
-          <h3>Standardværdier</h3>
-          <p class="text-muted">Disse værdier bruges som standard for nye kontrakter</p>
-          
-          <h4>Lejeperiode</h4>
+          <h3 data-i18n="settings.defaults.heading">Standardværdier</h3>
+          <p class="text-muted" data-i18n="settings.defaults.desc">Disse værdier bruges som standard for nye kontrakter</p>
+
+          <h4 data-i18n="settings.defaults.lejeperiode_heading">Lejeperiode</h4>
           <div class="form-group">
             <label class="checkbox-label">
               <input type="checkbox" id="default-start-dato">
-              Sæt startdato automatisk til dagens dato
+              <span data-i18n="settings.defaults.checkbox_startdato">Sæt startdato automatisk til dagens dato</span>
             </label>
           </div>
           <div class="form-group">
-            <label for="default-leje-dage">Standard lejeperiode (dage)</label>
+            <label for="default-leje-dage" data-i18n="settings.defaults.label_leje_dage">Standard lejeperiode (dage)</label>
             <input type="number" id="default-leje-dage" class="form-control" min="0" placeholder="f.eks. 1">
           </div>
           <div class="form-group">
-            <label for="default-fra-kl">Standard starttidspunkt</label>
+            <label for="default-fra-kl" data-i18n="settings.defaults.label_fra_kl">Standard starttidspunkt</label>
             <input type="text" id="default-fra-kl" class="form-control" placeholder="HH:MM">
           </div>
           <div class="form-group">
-            <label for="default-til-kl">Standard sluttidspunkt</label>
+            <label for="default-til-kl" data-i18n="settings.defaults.label_til_kl">Standard sluttidspunkt</label>
             <input type="text" id="default-til-kl" class="form-control" placeholder="HH:MM">
           </div>
 
-          <h4>Selvrisiko</h4>
+          <h4 data-i18n="settings.defaults.selvrisiko_heading">Selvrisiko</h4>
           <div class="form-group">
-            <label for="default-ansvar">Ansvar</label>
+            <label for="default-ansvar" data-i18n="settings.defaults.label_ansvar">Ansvar</label>
             <input type="text" id="default-ansvar" class="form-control">
           </div>
           <div class="form-group">
-            <label for="default-kasko">Kasko</label>
+            <label for="default-kasko" data-i18n="settings.defaults.label_kasko">Kasko</label>
             <input type="text" id="default-kasko" class="form-control">
           </div>
           <div class="form-group">
-            <label for="default-tillaeg">Selvrisiko-forsikring kr.</label>
+            <label for="default-tillaeg" data-i18n="settings.defaults.label_selvrisiko">Selvrisiko-forsikring kr.</label>
             <input type="text" id="default-tillaeg" class="form-control">
           </div>
-          
-          <h4>Bil</h4>
+
+          <h4 data-i18n="settings.defaults.bil_heading">Bil</h4>
           <div class="form-group">
-            <label for="default-braendstof">Brændstof pr. km kr.</label>
+            <label for="default-braendstof" data-i18n="settings.defaults.label_braendstof">Brændstof pr. km kr.</label>
             <input type="text" id="default-braendstof" class="form-control">
           </div>
-          
-          <button id="save-defaults-btn" class="btn btn-primary">Gem standardværdier</button>
+
+          <button id="save-defaults-btn" class="btn btn-primary" data-i18n="settings.defaults.btn_gem">Gem standardværdier</button>
         </div>
 
         <!-- Stempel Tab -->
         <div id="stempel-tab" class="tab-content">
-          <h3>Stempel / Underskrift</h3>
-          <p class="text-muted">Upload et billede der vises som overlay i "Udlejer (navn/underskrift)" boksen ved udskrivning.</p>
+          <h3 data-i18n="settings.stempel.heading">Stempel / Underskrift</h3>
+          <p class="text-muted" data-i18n="settings.stempel.desc">Upload et billede der vises som overlay i "Udlejer (navn/underskrift)" boksen ved udskrivning.</p>
 
           <div id="stamp-preview-wrap" style="display:none; margin: 1rem 0;">
-            <img id="stamp-preview-img" src="" alt="Stempel preview" style="max-height: 80px; max-width: 200px; border: 1px solid #ddd; border-radius: 4px; padding: 4px;">
+            <img id="stamp-preview-img" src="" alt="Stempel preview" data-i18n-attr-alt="settings.stempel.preview_alt" style="max-height: 80px; max-width: 200px; border: 1px solid #ddd; border-radius: 4px; padding: 4px;">
           </div>
 
           <div class="backup-actions">
-            <button id="upload-stamp-btn" class="btn btn-primary">Upload stempel</button>
+            <button id="upload-stamp-btn" class="btn btn-primary" data-i18n="settings.stempel.btn_upload">Upload stempel</button>
             <input type="file" id="stamp-file-input" accept="image/*" style="display:none;">
-            <button id="remove-stamp-btn" class="btn btn-secondary" style="display:none;">Fjern stempel</button>
+            <button id="remove-stamp-btn" class="btn btn-secondary" style="display:none;" data-i18n="settings.stempel.btn_remove">Fjern stempel</button>
           </div>
         </div>
 
         <!-- Tekster Tab -->
         <div id="tekster-tab" class="tab-content">
-          <h3>Tekster på side 1</h3>
-          <p class="text-muted">Tilpas de to informationstekster der vises under kontraktfelterne på side 1.</p>
+          <h3 data-i18n="settings.tekster.heading">Tekster på side 1</h3>
+          <p class="text-muted" data-i18n="settings.tekster.desc">Tilpas de to informationstekster der vises under kontraktfelterne på side 1.</p>
 
           <div class="form-group" style="margin-top:1.5rem;">
-            <label for="settings-note-black">Sort tekst</label>
+            <label for="settings-note-black" data-i18n="settings.tekster.label_sort">Sort tekst</label>
             <textarea id="settings-note-black" class="form-control" rows="4"></textarea>
           </div>
 
           <div class="form-group">
-            <label for="settings-note-red">Rød tekst (OBS)</label>
+            <label for="settings-note-red" data-i18n="settings.tekster.label_rod">Rød tekst (OBS)</label>
             <textarea id="settings-note-red" class="form-control" rows="3"></textarea>
           </div>
 
-          <button id="save-tekster-btn" class="btn btn-primary">Gem tekster</button>
-          <button id="reset-tekster-btn" class="btn btn-secondary" style="margin-left:0.5rem;">Nulstil til standard</button>
+          <button id="save-tekster-btn" class="btn btn-primary" data-i18n="settings.tekster.btn_gem">Gem tekster</button>
+          <button id="reset-tekster-btn" class="btn btn-secondary" style="margin-left:0.5rem;" data-i18n="settings.tekster.btn_reset">Nulstil til standard</button>
         </div>
 
         <!-- Export Tab -->
         <div id="export-tab" class="tab-content">
-          <h3>Backup & Gendan</h3>
-          <p class="text-muted">Eksporter og importer alle dine data</p>
-          
+          <h3 data-i18n="settings.export.heading">Backup & Gendan</h3>
+          <p class="text-muted" data-i18n="settings.export.desc">Eksporter og importer alle dine data</p>
+
           <div class="backup-actions">
-            <button id="export-data-btn" class="btn btn-primary">Eksporter alle data</button>
-            <button id="import-data-btn" class="btn btn-secondary">Importer data</button>
+            <button id="export-data-btn" class="btn btn-primary" data-i18n="settings.export.btn_export">Eksporter alle data</button>
+            <button id="import-data-btn" class="btn btn-secondary" data-i18n="settings.export.btn_import">Importer data</button>
             <input type="file" id="import-data-file" accept="application/json" style="display: none;">
           </div>
 
           <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #eee;">
-          <h4 style="margin-bottom: 0.5rem; color: #c0392b;">Nulstil alle data</h4>
-          <p class="text-muted" style="margin-bottom: 1rem;">Sletter alle gemte data permanent – udlejerprofiler, biler, indstillinger og nuværende kontrakt. Kan ikke fortrydes.</p>
-          <button id="reset-all-btn" class="btn btn-danger">Nulstil alle data</button>
+          <h4 style="margin-bottom: 0.5rem; color: #c0392b;" data-i18n="settings.export.reset_heading">Nulstil alle data</h4>
+          <p class="text-muted" style="margin-bottom: 1rem;" data-i18n="settings.export.reset_desc">Sletter alle gemte data permanent – udlejerprofiler, biler, indstillinger og nuværende kontrakt. Kan ikke fortrydes.</p>
+          <button id="reset-all-btn" class="btn btn-danger" data-i18n="settings.export.btn_reset">Nulstil alle data</button>
         </div>
       </div>
     </div>
@@ -679,128 +684,45 @@
   <div id="help-modal" class="modal no-print">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Hjælp</h2>
+        <h2 data-i18n="help.title">Hjælp</h2>
         <button class="close-modal" id="help-close">&times;</button>
       </div>
 
       <div class="modal-tabs">
-        <button class="tab-btn" id="help-tab-velkommen" onclick="switchHelpTab('velkommen')" style="display:none;">Velkommen</button>
-        <button class="tab-btn active" id="help-tab-generelt" onclick="switchHelpTab('generelt')">Generelt</button>
-        <button class="tab-btn" onclick="switchHelpTab('url')">URL-integration</button>
-        <button class="tab-btn" onclick="switchHelpTab('stempel')">Stempel</button>
-        <button class="tab-btn" onclick="switchHelpTab('backup')">Backup</button>
+        <button class="tab-btn" id="help-tab-velkommen" onclick="switchHelpTab('velkommen')" style="display:none;" data-i18n="help.tab_velkommen">Velkommen</button>
+        <button class="tab-btn active" id="help-tab-generelt" onclick="switchHelpTab('generelt')" data-i18n="help.tab_generelt">Generelt</button>
+        <button class="tab-btn" onclick="switchHelpTab('url')" data-i18n="help.tab_url">URL-integration</button>
+        <button class="tab-btn" onclick="switchHelpTab('stempel')" data-i18n="help.tab_stempel">Stempel</button>
+        <button class="tab-btn" onclick="switchHelpTab('backup')" data-i18n="help.tab_backup">Backup</button>
       </div>
 
       <div class="modal-body">
-
-        <!-- Velkommen (kun vist når ingen indstillinger er gemt) -->
         <div id="help-velkommen" class="tab-content">
-          <div style="text-align:center; padding: 1rem 0 1.5rem;">
-            <img src="images/iTunesArtwork.png" alt="QCompany logo" style="height:72px; width:auto; border-radius:10px; margin-bottom:1rem;">
-            <h3 style="font-size:1.4rem; margin-bottom:0.5rem;">Velkommen til Lejekontrakt</h3>
-            <p class="text-muted">af QCompany</p>
-          </div>
-
-          <p style="margin-bottom:1rem;">
-            Dette værktøj lader dig hurtigt oprette og udskrive professionelle lejekontakter til kundebiler –
-            direkte i din browser, uden installation og uden konto.
-          </p>
-
-          <div style="background:#f0f7ff; border-left:4px solid #0f6cbd; border-radius:4px; padding:1rem 1.25rem; margin-bottom:1.25rem;">
-            <strong>Dine data er 100% private.</strong><br>
-            Alt gemmes lokalt i denne browser – udlejerprofiler, biler, indstillinger og kontrakter.
-            Ingenting sendes til en server. Kun du har adgang til dine data.
-          </div>
-
-          <p style="margin-bottom:0.75rem;">Inden du går i gang, anbefaler vi at du læser hjælpesektionen:</p>
-          <ul style="line-height:2; padding-left:1.25rem; margin-bottom:1.25rem;">
-            <li><strong>Generelt</strong> – trin-for-trin guide til at oprette din første kontrakt</li>
-            <li><strong>Stempel</strong> – upload din underskrift eller firmaets stempel</li>
-            <li><strong>Backup</strong> – sådan eksporterer og gendanner du dine data</li>
-          </ul>
-
-          <p class="text-muted" style="font-size:0.9rem;">
-            Denne velkomstskærm vises kun, indtil du har oprettet din første udlejerprofil under <strong>Indstillinger</strong>.
-          </p>
+          <div data-i18n-html="help.velkommen_body"></div>
         </div>
 
-        <!-- Generelt -->
         <div id="help-generelt" class="tab-content active">
-          <h3>Kom godt i gang</h3>
-          <p class="text-muted" style="margin-bottom:1rem;">Sådan opretter du en lejekontrakt trin for trin.</p>
-          <ol style="line-height:2; padding-left:1.25rem;">
-            <li>Åbn <strong>Indstillinger</strong> og opret mindst én udlejerprofil og én bil – disse gemmes til fremtidig brug.</li>
-            <li>Vælg udlejer og bil i venstre side, eller udfyld felterne manuelt.</li>
-            <li>Udfyld lejers oplysninger: navn, telefon og kørekortoplysninger.</li>
-            <li>Angiv lejeperiode (fra/til dato og klokkeslæt) samt lejepris og selvrisiko.</li>
-            <li>Gennemse kontrakten i forhåndsvisningen til højre – felterne kan også redigeres direkte der.</li>
-            <li>Klik <strong>Udskriv</strong> for at printe kontrakten eller gemme den som PDF.</li>
-          </ol>
-          <p class="text-muted" style="margin-top:1rem;">Kontrakten gemmes automatisk løbende. Klik <strong>Ny Kontrakt</strong> for at starte en ny.</p>
+          <div data-i18n-html="help.generelt_body"></div>
         </div>
 
-        <!-- URL-integration -->
         <div id="help-url" class="tab-content">
-          <h3>URL-integration</h3>
-          <p class="text-muted" style="margin-bottom:1rem;">
-            Et eksternt system (f.eks. et værkstedssystem, CRM eller bookingsystem) kan åbne appen og forudfylde lejers oplysninger automatisk via URL-parametre.
-          </p>
-          <h4 style="margin-bottom:0.5rem;">Understøttede parametre</h4>
-          <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem; font-size:0.9rem;">
-            <thead>
-              <tr style="background:#f5f5f5;">
-                <th style="text-align:left; padding:0.5rem 0.75rem; border:1px solid #ddd;">Parameter</th>
-                <th style="text-align:left; padding:0.5rem 0.75rem; border:1px solid #ddd;">Felt</th>
-                <th style="text-align:left; padding:0.5rem 0.75rem; border:1px solid #ddd;">Format</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_navn</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Navn</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Fritekst</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_tlf</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Telefon</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Fritekst</td></tr>
-              <tr><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_koerekortnr</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Kørekort nr.</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Fritekst</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;"><code>lejer_koerekort_udstedt</code></td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">Udstedt den</td><td style="padding:0.4rem 0.75rem; border:1px solid #ddd;">DD-MM-YYYY</td></tr>
-            </tbody>
-          </table>
-          <h4 style="margin-bottom:0.5rem;">Eksempel-URL</h4>
-          <code style="display:block; background:#f5f5f5; border:1px solid #ddd; border-radius:4px; padding:0.75rem; font-size:0.8rem; word-break:break-all; line-height:1.6;">
-            https://lejekontrakt.qcompany.dk/?lejer_navn=Jan%20Hansen&amp;lejer_tlf=12345678&amp;lejer_koerekortnr=1234567890&amp;lejer_koerekort_udstedt=15-06-2018
-          </code>
-          <p class="text-muted" style="margin-top:1rem;">
-            Når appen åbner med parametre, oprettes altid en ny kontrakt med de angivne oplysninger. Parametrene fjernes automatisk fra adresselinjen – et genindlæs anvender dem ikke igen.
-          </p>
+          <div data-i18n-html="help.url_body"></div>
         </div>
 
-        <!-- Stempel -->
         <div id="help-stempel" class="tab-content">
-          <h3>Stempel / underskrift-overlay</h3>
-          <p class="text-muted" style="margin-bottom:1rem;">Du kan uploade et billede (f.eks. en scannet underskrift eller et firmastempel) der automatisk vises i "Udlejer (navn/underskrift)"-boksen på side 1.</p>
-          <ol style="line-height:2; padding-left:1.25rem;">
-            <li>Åbn <strong>Indstillinger → Stempel</strong>.</li>
-            <li>Klik <strong>Upload stempel</strong> og vælg et billede (PNG med transparent baggrund anbefales).</li>
-            <li>Billedet gemmes og vises straks i underskriftsboksen i forhåndsvisningen.</li>
-            <li>Stemplet medtages automatisk ved udskrivning.</li>
-            <li>Klik <strong>Fjern stempel</strong> for at slette det igen.</li>
-          </ol>
-          <p class="text-muted" style="margin-top:1rem;">Stemplet gemmes lokalt i browseren og følger med ved backup-eksport.</p>
+          <div data-i18n-html="help.stempel_body"></div>
         </div>
 
-        <!-- Backup -->
         <div id="help-backup" class="tab-content">
-          <h3>Backup &amp; Gendan</h3>
-          <p class="text-muted" style="margin-bottom:1rem;">Alle data (udlejerprofiler, biler, indstillinger og stempel) gemmes i browserens lokale lager. Brug eksport/import til at tage backup eller flytte data til en anden browser/enhed.</p>
-          <h4 style="margin-bottom:0.5rem;">Eksporter</h4>
-          <p style="margin-bottom:1rem;">Åbn <strong>Indstillinger → Backup</strong> og klik <strong>Eksporter alle data</strong>. En JSON-fil downloades til din computer.</p>
-          <h4 style="margin-bottom:0.5rem;">Importer</h4>
-          <p>Klik <strong>Importer data</strong> og vælg en tidligere eksporteret JSON-fil.</p>
-          <p class="text-muted" style="margin-top:0.5rem;"><strong>OBS:</strong> Import overskriver alle eksisterende data – tag en eksport først, hvis du vil bevare nuværende data.</p>
+          <div data-i18n-html="help.backup_body"></div>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- Scripts -->
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+  <script src="js/i18n.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/modules/preview.js"></script>
   <script src="js/modules/form.js"></script>

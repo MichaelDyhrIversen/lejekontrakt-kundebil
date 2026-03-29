@@ -53,7 +53,7 @@ const CarManager = {
     this.listContainer.innerHTML = '';
     
     if (biler.length === 0) {
-      this.listContainer.innerHTML = '<p class="empty-message">Ingen biler endnu. Klik "Tilføj bil" for at oprette.</p>';
+      this.listContainer.innerHTML = `<p class="empty-message">${I18nManager.t('dynamic.empty_biler')}</p>`;
       return;
     }
     
@@ -70,7 +70,7 @@ const CarManager = {
 
       const sub = document.createElement('div');
       sub.className = 'text-muted';
-      sub.textContent = `Reg.nr: ${bil.regnr}`;
+      sub.textContent = I18nManager.t('dynamic.car_regnr_prefix') + bil.regnr;
       content.appendChild(sub);
 
       const actions = document.createElement('div');
@@ -78,13 +78,13 @@ const CarManager = {
 
       const editBtn = document.createElement('button');
       editBtn.className = 'btn-sm';
-      editBtn.textContent = 'Rediger';
+      editBtn.textContent = I18nManager.t('dynamic.btn_edit');
       editBtn.addEventListener('click', () => CarManager.edit(bil.id));
       actions.appendChild(editBtn);
 
       const delBtn = document.createElement('button');
       delBtn.className = 'btn-sm btn-danger';
-      delBtn.textContent = 'Slet';
+      delBtn.textContent = I18nManager.t('dynamic.btn_delete');
       delBtn.addEventListener('click', () => CarManager.delete(bil.id));
       actions.appendChild(delBtn);
 
@@ -131,7 +131,7 @@ const CarManager = {
     const lejepris = document.getElementById('settings-car-lejepris').value.trim();
 
     if (!model || !regnr) {
-      alert('Model og registreringsnummer er påkrævet');
+      alert(I18nManager.t('dialogs.validation_bil'));
       return;
     }
 
@@ -146,7 +146,7 @@ const CarManager = {
     this.hideForm();
     this.loadList();
     ContractForm.updateCarSelector();
-    SettingsManager.showMessage('Bil gemt!');
+    SettingsManager.showMessage(I18nManager.t('toasts.bil_gemt'));
   },
 
   /**
@@ -163,11 +163,11 @@ const CarManager = {
    * Delete car
    */
   delete(id) {
-    if (confirm('Er du sikker på at du vil slette denne bil?')) {
+    if (confirm(I18nManager.t('dialogs.confirm_delete_bil'))) {
       StorageManager.deleteBil(id);
       this.loadList();
       ContractForm.updateCarSelector();
-      SettingsManager.showMessage('Bil slettet');
+      SettingsManager.showMessage(I18nManager.t('toasts.bil_slettet'));
     }
   }
 };

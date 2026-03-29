@@ -18,7 +18,10 @@ const App = {
     
     // Initialize storage
     StorageManager.init();
-    
+
+    // Initialize i18n (must come before any module that renders DOM text)
+    I18nManager.init();
+
     // Initialize all modules
     TemplatePreview.init();
     ContractForm.init();
@@ -42,13 +45,34 @@ const App = {
    */
   readUrlParams() {
     const p = new URLSearchParams(location.search);
-    const supported = ['lejer_navn', 'lejer_tlf', 'lejer_koerekortnr', 'lejer_koerekort_udstedt'];
-    if (!supported.some(f => p.has(f))) return null;
+
+    // English aliases map to internal Danish field names
+    const EN_MAP = {
+      renter_name:         'lejer_navn',
+      renter_phone:        'lejer_tlf',
+      renter_license:      'lejer_koerekortnr',
+      renter_license_date: 'lejer_koerekort_udstedt'
+    };
+    const DA_KEYS = ['lejer_navn', 'lejer_tlf', 'lejer_koerekortnr', 'lejer_koerekort_udstedt'];
+    const allSupported = [...Object.keys(EN_MAP), ...DA_KEYS];
+
+    if (!allSupported.some(f => p.has(f))) return null;
+
+    // Resolve: English alias wins if both provided
+    const resolved = {};
+    for (const [enKey, daKey] of Object.entries(EN_MAP)) {
+      if (p.has(enKey)) resolved[daKey] = p.get(enKey);
+    }
+    // Danish names fill in any gaps
+    for (const daKey of ['lejer_navn', 'lejer_tlf', 'lejer_koerekortnr', 'lejer_koerekort_udstedt']) {
+      if (p.has(daKey) && resolved[daKey] === undefined) resolved[daKey] = p.get(daKey);
+    }
+
     return {
-      navn: p.get('lejer_navn') || '',
-      tlf: p.get('lejer_tlf') || '',
-      koerekortnr: p.get('lejer_koerekortnr') || '',
-      koerekort_udstedt: p.get('lejer_koerekort_udstedt') || ''
+      navn:              resolved['lejer_navn'] || '',
+      tlf:               resolved['lejer_tlf'] || '',
+      koerekortnr:       resolved['lejer_koerekortnr'] || '',
+      koerekort_udstedt: resolved['lejer_koerekort_udstedt'] || ''
     };
   },
 
@@ -87,7 +111,7 @@ const App = {
   newContract() {
     // Warn about unsaved changes
     if (this.state.unsavedChanges) {
-      if (!confirm('Du har ugemte ændringer. Er du sikker på at du vil oprette en ny kontrakt?')) {
+      if (!confirm(I18nManager.t('dialogs.confirm_new_contract'))) {
         return;
       }
     }

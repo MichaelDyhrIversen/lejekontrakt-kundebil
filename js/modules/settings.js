@@ -116,9 +116,9 @@ const SettingsManager = {
     this.modal.classList.remove('active');
   },
 
-  // Default note texts (mirrors the HTML defaults)
-  DEFAULT_NOTE_BLACK: 'Bilen må kun føres af lejer (eller angivet fører) i lejeperioden. Bilen må ikke fremlejes, benyttes til motorsport, eller til person - eller godstransport mod betaling. Bilen må kun anvendes til kørsel i Danmark. Udlejer er berettiget til at undlade at egne kaskoforsiking. Lejer er i såfald stillet som om kaskoforsikringen var tegnet. Lejer hæfter for alle skader, som ikke er eller ville være dækket af en tegnet kaskoforsikring. Bemærk venligst at bilen er en ikke ryger bil, og der må ikke medtages husdyr. Udgifter iøvrigt i forbindelse med uheld under udlejning afholdes af lejer. Udgifter til reparationer foretaget uden aftale med Udlejer, er denne uvedkommende. Eventuelle standsning- og parkeringsafgifter, samt andre bøder og afgifter i forbindelse med lejeperioden, påhviler lejer. Lejeaftalen kan kun forlænges ved ny lejeaftale. Lejekontrakten skal medbringes under kørsel og fremvises ved forlangende fra politiet eller andre myndigheder.',
-  DEFAULT_NOTE_RED: 'OBS: Læs venligst vilkår på bagsiden/side 2 om ansvar, selvrisiko og erstatning. Egenandel ved kasko fremgår af policen og udleveres ved underskrift.',
+  // Default note texts – language-aware via i18n
+  get DEFAULT_NOTE_BLACK() { return I18nManager.t('notes.default_black'); },
+  get DEFAULT_NOTE_RED()   { return I18nManager.t('notes.default_red'); },
 
   /**
    * Apply stored note texts to the template
@@ -153,7 +153,7 @@ const SettingsManager = {
     settings.noteRed = noteRedInput ? noteRedInput.value.trim() : '';
     StorageManager.updateSettings(settings);
     this.applyTexts();
-    this.showMessage('Tekster gemt!');
+    this.showMessage(I18nManager.t('toasts.tekster_gemt'));
   },
 
   /**
@@ -169,7 +169,7 @@ const SettingsManager = {
     settings.noteRed = '';
     StorageManager.updateSettings(settings);
     this.applyTexts();
-    this.showMessage('Tekster nulstillet!');
+    this.showMessage(I18nManager.t('toasts.tekster_nulstillet'));
   },
 
   /**
@@ -214,7 +214,7 @@ const SettingsManager = {
       settings.stampImage = e.target.result;
       StorageManager.updateSettings(settings);
       this.applyStamp();
-      this.showMessage('Stempel gemt!');
+      this.showMessage(I18nManager.t('toasts.stempel_gemt'));
     };
     reader.readAsDataURL(file);
 
@@ -230,7 +230,7 @@ const SettingsManager = {
     settings.stampImage = null;
     StorageManager.updateSettings(settings);
     this.applyStamp();
-    this.showMessage('Stempel fjernet!');
+    this.showMessage(I18nManager.t('toasts.stempel_fjernet'));
   },
 
   /**
@@ -340,7 +340,7 @@ const SettingsManager = {
     };
     
     StorageManager.updateSettings(settings);
-    this.showMessage('Standardværdier gemt!');
+    this.showMessage(I18nManager.t('toasts.standardvaerdier_gemt'));
   },
 
   /**
@@ -358,7 +358,7 @@ const SettingsManager = {
     a.click();
     
     URL.revokeObjectURL(url);
-    this.showMessage('Data eksporteret!');
+    this.showMessage(I18nManager.t('toasts.data_eksporteret'));
   },
 
   /**
@@ -372,13 +372,13 @@ const SettingsManager = {
       const text = await file.text();
       const data = JSON.parse(text);
       
-      if (confirm('Dette vil overskrive alle eksisterende data. Er du sikker?')) {
+      if (confirm(I18nManager.t('dialogs.confirm_import'))) {
         StorageManager.importAll(data);
-        this.showMessage('Data importeret! Genindlæser...');
+        this.showMessage(I18nManager.t('toasts.data_importeret'));
         setTimeout(() => location.reload(), 1000);
       }
     } catch (e) {
-      alert('Kunne ikke importere data: ' + e.message);
+      alert(I18nManager.t('dialogs.import_error') + e.message);
     }
     
     // Reset file input
@@ -389,20 +389,11 @@ const SettingsManager = {
    * Reset all stored data with confirmation
    */
   resetAllData() {
-    const confirmed = confirm(
-      'ADVARSEL: Dette sletter alle dine gemte data permanent.\n\n' +
-      'Følgende vil blive slettet:\n' +
-      '• Alle udlejerprofiler\n' +
-      '• Alle biler\n' +
-      '• Alle indstillinger og stempel\n' +
-      '• Nuværende kontrakt\n\n' +
-      'Overvej at tage en backup først (Eksporter alle data).\n\n' +
-      'Er du sikker på at du vil fortsætte?'
-    );
+    const confirmed = confirm(I18nManager.t('dialogs.confirm_reset_all'));
     if (!confirmed) return;
 
     Object.values(StorageManager.KEYS).forEach(key => StorageManager.remove(key));
-    this.showMessage('Alle data er slettet. Genindlæser...');
+    this.showMessage(I18nManager.t('toasts.alle_data_slettet'));
     setTimeout(() => location.reload(), 1000);
   },
 

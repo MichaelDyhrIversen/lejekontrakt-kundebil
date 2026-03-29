@@ -249,7 +249,7 @@ const ContractForm = {
     const udlejere = StorageManager.getUdlejere();
     const selectedId = App.state.currentContract?.udlejerId;
 
-    select.innerHTML = '<option value="">-- Vælg udlejer --</option>';
+    select.innerHTML = `<option value="">${I18nManager.t('ui.form.option_select_udlejer')}</option>`;
     udlejere.forEach(u => {
       const option = document.createElement('option');
       option.value = u.id;
@@ -271,7 +271,7 @@ const ContractForm = {
     const biler = StorageManager.getBiler();
     const selectedId = App.state.currentContract?.bilId;
 
-    select.innerHTML = '<option value="">-- Vælg bil --</option>';
+    select.innerHTML = `<option value="">${I18nManager.t('ui.form.option_select_bil')}</option>`;
     biler.forEach(b => {
       const option = document.createElement('option');
       option.value = b.id;

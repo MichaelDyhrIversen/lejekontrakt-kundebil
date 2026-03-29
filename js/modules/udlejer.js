@@ -54,7 +54,7 @@ const UdlejerManager = {
     this.listContainer.innerHTML = '';
     
     if (udlejere.length === 0) {
-      this.listContainer.innerHTML = '<p class="empty-message">Ingen udlejere endnu. Klik "Tilføj udlejer" for at oprette.</p>';
+      this.listContainer.innerHTML = `<p class="empty-message">${I18nManager.t('dynamic.empty_udlejere')}</p>`;
       return;
     }
     
@@ -74,7 +74,7 @@ const UdlejerManager = {
       if (isDefault) {
         const badge = document.createElement('span');
         badge.className = 'badge';
-        badge.textContent = 'Standard';
+        badge.textContent = I18nManager.t('dynamic.badge_standard');
         content.appendChild(badge);
       }
 
@@ -89,20 +89,20 @@ const UdlejerManager = {
       if (!isDefault) {
         const defaultBtn = document.createElement('button');
         defaultBtn.className = 'btn-sm';
-        defaultBtn.textContent = 'Sæt som standard';
+        defaultBtn.textContent = I18nManager.t('dynamic.btn_set_default');
         defaultBtn.addEventListener('click', () => UdlejerManager.setDefault(udlejer.id));
         actions.appendChild(defaultBtn);
       }
 
       const editBtn = document.createElement('button');
       editBtn.className = 'btn-sm';
-      editBtn.textContent = 'Rediger';
+      editBtn.textContent = I18nManager.t('dynamic.btn_edit');
       editBtn.addEventListener('click', () => UdlejerManager.edit(udlejer.id));
       actions.appendChild(editBtn);
 
       const delBtn = document.createElement('button');
       delBtn.className = 'btn-sm btn-danger';
-      delBtn.textContent = 'Slet';
+      delBtn.textContent = I18nManager.t('dynamic.btn_delete');
       delBtn.addEventListener('click', () => UdlejerManager.delete(udlejer.id));
       actions.appendChild(delBtn);
 
@@ -149,7 +149,7 @@ const UdlejerManager = {
     const postby = document.getElementById('settings-udlejer-postby').value.trim();
     
     if (!navn) {
-      alert('Navn er påkrævet');
+      alert(I18nManager.t('dialogs.validation_udlejer_navn'));
       return;
     }
     
@@ -170,7 +170,7 @@ const UdlejerManager = {
     this.hideForm();
     this.loadList();
     ContractForm.updateUdlejerSelector();
-    SettingsManager.showMessage('Udlejer gemt!');
+    SettingsManager.showMessage(I18nManager.t('toasts.udlejer_gemt'));
   },
 
   /**
@@ -187,11 +187,11 @@ const UdlejerManager = {
    * Delete udlejer
    */
   delete(id) {
-    if (confirm('Er du sikker på at du vil slette denne udlejer?')) {
+    if (confirm(I18nManager.t('dialogs.confirm_delete_udlejer'))) {
       StorageManager.deleteUdlejer(id);
       this.loadList();
       ContractForm.updateUdlejerSelector();
-      SettingsManager.showMessage('Udlejer slettet');
+      SettingsManager.showMessage(I18nManager.t('toasts.udlejer_slettet'));
     }
   },
 
@@ -201,6 +201,6 @@ const UdlejerManager = {
   setDefault(id) {
     StorageManager.setDefaultUdlejer(id);
     this.loadList();
-    SettingsManager.showMessage('Standard udlejer opdateret');
+    SettingsManager.showMessage(I18nManager.t('toasts.standard_udlejer_opdateret'));
   }
 };
