@@ -1,3 +1,7 @@
 # Claude Code internal files
 .claude/
 plans/
+.agents/
+.vscode/
+
+skills-lock.json

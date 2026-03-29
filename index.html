@@ -3,7 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lejekontrakt - Kundebil</title>
+  <title>Lejekontrakt til Kundebil – Gratis og Nem | QCompany</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Opret en professionel lejekontrakt til kundebiler på få minutter. Udfyld udlejer, lejer og biloplysninger – og udskriv direkte fra browseren. Gratis og uden konto.">
+  <meta name="keywords" content="lejekontrakt, kundebil, lånebilaaftale, lejekontrakt bil, gratis lejekontrakt, udlejningskontrakt bil, billejekontrakt, QCompany">
+  <meta name="author" content="QCompany">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lejekontrakt.qcompany.dk/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/appicon.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="images/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-ipad-retina.png">
+
+  <!-- Open Graph (social sharing) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lejekontrakt.qcompany.dk/">
+  <meta property="og:title" content="Lejekontrakt til Kundebil – Gratis og Nem | QCompany">
+  <meta property="og:description" content="Opret en professionel lejekontrakt til kundebiler på få minutter. Udfyld, tilpas og udskriv direkte fra browseren. Gratis og uden konto.">
+  <meta property="og:image" content="https://lejekontrakt.qcompany.dk/images/iTunesArtwork.png">
+  <meta property="og:locale" content="da_DK">
+  <meta property="og:site_name" content="QCompany Lejekontrakt">
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Lejekontrakt til Kundebil",
+    "description": "Opret en professionel lejekontrakt til kundebiler på få minutter. Udfyld, tilpas og udskriv direkte fra browseren.",
+    "url": "https://lejekontrakt.qcompany.dk/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "DKK"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "QCompany",
+      "url": "https://qcompany.dk"
+    },
+    "inLanguage": "da"
+  }
+  </script>
+
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/print.css">
 </head>
@@ -11,7 +59,10 @@
   <!-- Header -->
   <header class="app-header no-print">
     <div class="header-content">
-      <h1>Lejekontrakt - Kundebil</h1>
+      <div class="header-brand">
+        <img src="images/iTunesArtwork.png" alt="QCompany logo" class="header-logo">
+        <h1>Lejekontrakt - Kundebil</h1>
+      </div>
       <div class="header-actions">
         <button id="new-contract-btn" class="btn btn-secondary">Ny Kontrakt</button>
         <button id="settings-btn" class="btn btn-secondary">Indstillinger</button>
@@ -435,6 +486,11 @@
           <div></div>
         </div>
       </section>
+
+      <!-- Footer -->
+      <footer class="app-footer no-print">
+        <p>&copy; <span id="footer-year"></span> <a href="https://qcompany.dk" target="_blank" rel="noopener">QCompany</a> – Alle rettigheder forbeholdes</p>
+      </footer>
     </main>
   </div>
 
@@ -609,6 +665,11 @@
             <button id="import-data-btn" class="btn btn-secondary">Importer data</button>
             <input type="file" id="import-data-file" accept="application/json" style="display: none;">
           </div>
+
+          <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #eee;">
+          <h4 style="margin-bottom: 0.5rem; color: #c0392b;">Nulstil alle data</h4>
+          <p class="text-muted" style="margin-bottom: 1rem;">Sletter alle gemte data permanent – udlejerprofiler, biler, indstillinger og nuværende kontrakt. Kan ikke fortrydes.</p>
+          <button id="reset-all-btn" class="btn btn-danger">Nulstil alle data</button>
         </div>
       </div>
     </div>
@@ -623,13 +684,45 @@
       </div>
 
       <div class="modal-tabs">
-        <button class="tab-btn active" onclick="switchHelpTab('generelt')">Generelt</button>
+        <button class="tab-btn" id="help-tab-velkommen" onclick="switchHelpTab('velkommen')" style="display:none;">Velkommen</button>
+        <button class="tab-btn active" id="help-tab-generelt" onclick="switchHelpTab('generelt')">Generelt</button>
         <button class="tab-btn" onclick="switchHelpTab('url')">URL-integration</button>
         <button class="tab-btn" onclick="switchHelpTab('stempel')">Stempel</button>
         <button class="tab-btn" onclick="switchHelpTab('backup')">Backup</button>
       </div>
 
       <div class="modal-body">
+
+        <!-- Velkommen (kun vist når ingen indstillinger er gemt) -->
+        <div id="help-velkommen" class="tab-content">
+          <div style="text-align:center; padding: 1rem 0 1.5rem;">
+            <img src="images/iTunesArtwork.png" alt="QCompany logo" style="height:72px; width:auto; border-radius:10px; margin-bottom:1rem;">
+            <h3 style="font-size:1.4rem; margin-bottom:0.5rem;">Velkommen til Lejekontrakt</h3>
+            <p class="text-muted">af QCompany</p>
+          </div>
+
+          <p style="margin-bottom:1rem;">
+            Dette værktøj lader dig hurtigt oprette og udskrive professionelle lejekontakter til kundebiler –
+            direkte i din browser, uden installation og uden konto.
+          </p>
+
+          <div style="background:#f0f7ff; border-left:4px solid #0f6cbd; border-radius:4px; padding:1rem 1.25rem; margin-bottom:1.25rem;">
+            <strong>Dine data er 100% private.</strong><br>
+            Alt gemmes lokalt i denne browser – udlejerprofiler, biler, indstillinger og kontrakter.
+            Ingenting sendes til en server. Kun du har adgang til dine data.
+          </div>
+
+          <p style="margin-bottom:0.75rem;">Inden du går i gang, anbefaler vi at du læser hjælpesektionen:</p>
+          <ul style="line-height:2; padding-left:1.25rem; margin-bottom:1.25rem;">
+            <li><strong>Generelt</strong> – trin-for-trin guide til at oprette din første kontrakt</li>
+            <li><strong>Stempel</strong> – upload din underskrift eller firmaets stempel</li>
+            <li><strong>Backup</strong> – sådan eksporterer og gendanner du dine data</li>
+          </ul>
+
+          <p class="text-muted" style="font-size:0.9rem;">
+            Denne velkomstskærm vises kun, indtil du har oprettet din første udlejerprofil under <strong>Indstillinger</strong>.
+          </p>
+        </div>
 
         <!-- Generelt -->
         <div id="help-generelt" class="tab-content active">
@@ -707,6 +800,7 @@
   </div>
 
   <!-- Scripts -->
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
   <script src="js/storage.js"></script>
   <script src="js/modules/preview.js"></script>
   <script src="js/modules/form.js"></script>

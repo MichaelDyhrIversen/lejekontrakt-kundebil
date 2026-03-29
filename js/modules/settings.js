@@ -79,6 +79,12 @@ const SettingsManager = {
       resetTeksterBtn.addEventListener('click', () => this.resetTekster());
     }
 
+    // Reset all data button
+    const resetAllBtn = document.getElementById('reset-all-btn');
+    if (resetAllBtn) {
+      resetAllBtn.addEventListener('click', () => this.resetAllData());
+    }
+
     // Stamp buttons
     const uploadStampBtn = document.getElementById('upload-stamp-btn');
     const stampFileInput = document.getElementById('stamp-file-input');
@@ -377,6 +383,27 @@ const SettingsManager = {
     
     // Reset file input
     event.target.value = '';
+  },
+
+  /**
+   * Reset all stored data with confirmation
+   */
+  resetAllData() {
+    const confirmed = confirm(
+      'ADVARSEL: Dette sletter alle dine gemte data permanent.\n\n' +
+      'Følgende vil blive slettet:\n' +
+      '• Alle udlejerprofiler\n' +
+      '• Alle biler\n' +
+      '• Alle indstillinger og stempel\n' +
+      '• Nuværende kontrakt\n\n' +
+      'Overvej at tage en backup først (Eksporter alle data).\n\n' +
+      'Er du sikker på at du vil fortsætte?'
+    );
+    if (!confirmed) return;
+
+    Object.values(StorageManager.KEYS).forEach(key => StorageManager.remove(key));
+    this.showMessage('Alle data er slettet. Genindlæser...');
+    setTimeout(() => location.reload(), 1000);
   },
 
   /**

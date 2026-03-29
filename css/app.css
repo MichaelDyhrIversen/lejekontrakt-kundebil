@@ -42,9 +42,42 @@ html, body {
   font-weight: 600;
 }
 
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-logo {
+  height: 40px;
+  width: auto;
+  border-radius: 6px;
+}
+
 .header-actions {
   display: flex;
   gap: 0.75rem;
+}
+
+/* Footer */
+.app-footer {
+  background: transparent;
+  color: rgba(0,0,0,0.25);
+  text-align: center;
+  padding: 0.6rem 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  user-select: none;
+}
+
+.app-footer a {
+  color: rgba(0,0,0,0.3);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  color: rgba(0,0,0,0.5);
 }
 
 /* Buttons */

@@ -158,11 +158,18 @@ const App = {
       if (e.target === helpModal) helpModal.classList.remove('active');
     });
 
+    // Auto-open help on Velkommen tab for first-time visitors (no udlejere configured yet)
+    if (helpModal && StorageManager.getUdlejere().length === 0) {
+      const welcomeTabBtn = document.getElementById('help-tab-velkommen');
+      if (welcomeTabBtn) welcomeTabBtn.style.display = '';
+      switchHelpTab('velkommen');
+      helpModal.classList.add('active');
+    }
+
     // Warn before leaving with unsaved changes
     window.addEventListener('beforeunload', (e) => {
       if (this.state.unsavedChanges) {
         e.preventDefault();
-        e.returnValue = '';
       }
     });
   }
